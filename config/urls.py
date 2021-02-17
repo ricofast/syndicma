@@ -1,4 +1,4 @@
-"""opencourse URL Configuration
+"""syndicma URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.0/topics/http/urls/
@@ -19,19 +19,19 @@ from django.contrib import admin
 from django.urls import include, path
 from django.views.generic import RedirectView
 from django.views.i18n import JavaScriptCatalog
-from opencourse.profiles.views import ProfileView
+from syndicma.profiles.views import ProfileView
 
 urlpatterns = [
     path(settings.ADMIN_URL, admin.site.urls),
-    path("accounts/", include("allauth.urls")),
-    path("accounts/profile/", ProfileView.as_view()),
-    path("profiles/", include("opencourse.profiles.urls", namespace="profiles")),
+    # path("accounts/", include("allauth.urls")),
+    # path("accounts/profile/", ProfileView.as_view()),
+    path("profiles/", include("syndicma.profiles.urls", namespace="profiles")),
     path("jsi18n/", JavaScriptCatalog.as_view(), name="javascript-catalog"),
     path("i18n/", include("django.conf.urls.i18n")),
-    path("institut/", include("opencourse.institut.urls", namespace="institut")),
-    path("schedule/", include("opencourse.schedule.urls", namespace="schedule")),
-    path("", RedirectView.as_view(pattern_name="institut:search")),
-    path("comments/", include('django_comments_xtd.urls')),
+    path("syndic/", include("syndicma.syndic.urls", namespace="syndic")),
+    #path("schedule/", include("syndicma.schedule.urls", namespace="schedule")),
+    path("", RedirectView.as_view(pattern_name="syndic:search")),
+    #path("comments/", include('django_comments_xtd.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:

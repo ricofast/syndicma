@@ -5,7 +5,7 @@ from django.urls import reverse
 from django.shortcuts import redirect
 from django.contrib.auth import logout
 from django.contrib.sessions.models import Session
-from opencourse.profiles.models import Student
+from syndicma.profiles.models import Student
 
 #EXEMPT_URLS = [re.compile(reverse(settings.LOGIN_URL))]
 
