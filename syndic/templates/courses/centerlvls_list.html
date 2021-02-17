@@ -1,0 +1,127 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block content_title %}
+    <h2 class="h3">{% trans "Center Levels" %}</h2>
+
+
+{% endblock content_title %}
+
+
+{% block css %}
+    {{ block.super }}
+
+{% endblock css %}
+
+{% block content %}
+    <div class="page-header">
+				<div class="page-header-content header-elements-md-inline">
+					<div class="page-title d-flex">
+						<h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">{% trans "Home" %}</span> - {% trans "School Levels Menu" %}</h4>
+						<a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
+					</div>
+
+					{% comment %}<div class="header-elements d-none text-center text-md-left mb-3 mb-md-0">
+						<div class="btn-group">
+							<button type="button" class="btn bg-indigo-400"><i class="icon-stack2 mr-2"></i> New report</button>
+							<button type="button" class="btn bg-indigo-400 dropdown-toggle" data-toggle="dropdown"></button>
+							<div class="dropdown-menu dropdown-menu-right">
+								<div class="dropdown-header">Actions</div>
+								<a href="#" class="dropdown-item"><i class="icon-file-eye"></i> View reports</a>
+								<a href="#" class="dropdown-item"><i class="icon-file-plus"></i> Edit reports</a>
+								<a href="#" class="dropdown-item"><i class="icon-file-stats"></i> Statistics</a>
+								<div class="dropdown-header">Export</div>
+								<a href="#" class="dropdown-item"><i class="icon-file-pdf"></i> Export to PDF</a>
+								<a href="#" class="dropdown-item"><i class="icon-file-excel"></i> Export to CSV</a>
+							</div>
+						</div>
+					</div>{% endcomment %}
+				</div>
+    </div>
+
+    <div class="d-md-flex align-items-md-start justify-content-center">
+        <div class="tab-content w-md-75">
+
+
+
+
+                <div class="card">
+                    <div class="card-header header-elements-inline">
+
+
+
+                            <h6 class="card-title">{% trans "List of School Levels" %}</h6>
+
+                             <a class=" btn btn-primary mb-4 btn"
+                                        href="{% url 'courses:centers:centerlvl_create' %}">{% trans "Create a School Level" %}</a>
+
+								<div class="header-elements">
+									<div class="list-icons">
+				                		<a class="list-icons-item" data-action="collapse"></a>
+				                		<a class="list-icons-item" data-action="reload"></a>
+{#				                		<a class="list-icons-item" data-action="remove"></a>#}
+				                	</div>
+			                	</div>
+
+                        </div>
+
+
+                    <div class="card-body">
+
+
+                        <p class="card-text">
+                        <ul class="list-group">
+                            {% for center in object_list %}
+                            <div class="container-fluid">
+                            <div class="row">
+                            <div class="col-md-8 ">
+                                {{ center }}
+                            </div>
+                            <div class="col-md-4">
+                                <li class="list-group-item">
+
+
+
+                                    <a href="{% url 'courses:centers:centerlvl_delete' center.pk %}"><button type="button" class="btn btn-primary btn-sm float-right"><i class="icon-trash mr-2"></i> {% trans "Delete" %}</button></a>
+                                    <a href="{% url 'courses:centers:centerlvl_edit' center.pk %}"><button type="button" class="btn btn-warning btn-sm float-right"><i class="icon-pencil mr-2"></i> {% trans "Edit" %}</button></a>
+
+
+
+                                            {% comment %}<a class="btn btn-danger float-right mx-1 my-1 btn-sm " data-toggle="tooltip" data-placement="top" title={% trans "Delete" %} href="{% url 'courses:delete' course.pk %}"
+                                               role="button"><span class="oi oi-trash"></span>Delete</a>
+                                            <a class="btn btn-warning float-right btn-sm  mx-1 my-1" data-toggle="tooltip" data-placement="top" title={% trans "Edit" %} href="{% url 'courses:edit' course.pk %}"
+                                               role="button"><span class="oi oi-pencil "></span>Edit Prof</a>
+                                            <a class="btn btn-warning float-right btn-sm  mx-1 my-1" data-toggle="tooltip" data-placement="top" title={% trans "Edit" %} href="{% url 'courses:edittime' course.pk %}"
+                                               role="button"><span class="oi oi-pencil "></span>Edit Admin</a>
+                                            <a class="btn btn-info float-right btn-sm  mx-1 my-1" data-toggle="tooltip" data-placement="top" title={% trans "Handouts" %}
+                                               href="{% url 'courses:handouts:list' course.pk %}" role="button">
+                                                <span class="oi oi-list"></span>Handouts</a>
+                                            <a class="btn btn-info float-right btn-sm mx-1 my-1" data-toggle="tooltip" data-placement="top" title={% trans "Students_List" %}
+                                               href="{% url 'courses:students_list' course.pk %}" role="button">
+                                                <span class="oi oi-people"></span>Student List</a>{% endcomment %}
+
+
+                                </li>
+                            </div>
+                            </div>
+                            </div>
+                            {% empty %}
+                                <li class="list-group-item">{% trans "No Schools yet." %}</li>
+                            {% endfor %}
+                        </ul>
+                        </p>
+                    </div>
+                    <div class="card-footer">
+
+
+                    </div>
+                </div>
+
+
+
+        </div>
+    </div>
+
+
+{% endblock content %}

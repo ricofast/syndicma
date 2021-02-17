@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load i18n%}
+{% load crispy_forms_tags %}
+
+{% load quiz_tags %}
+
+{% block title %} {% trans 'Create a New Quiz' %} {% endblock %}
+{% block description %} {% trans 'Create a New Quiz' %} {% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-9">
+                <form action="" method="POST">{% csrf_token %}
+
+                    {{ form|crispy }}
+
+                    <input type="submit" value={% trans "Create" %} class="btn btn-large btn-block btn-warning" >
+                </form>
+
+
+
+                <hr>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

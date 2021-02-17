@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+
+{% block content_title %}
+  <h2 class="h3">{% trans "Classes" %}</h2>
+{% endblock content_title %}
+{% block css %}
+    {{ block.super }}
+
+{% endblock css %}
+
+
+{% block content %}
+        <div class="page-header">
+				<div class="page-header-content header-elements-md-inline">
+					<div class="page-title d-flex">
+						<h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">{% trans "Home" %}</span> - {% trans "Create a New Class" %}</h4>
+						<a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
+					</div>
+
+				</div>
+    </div>
+
+
+
+    <div class="row justify-content-center">
+        <div class="col-md-7">
+
+
+                <div class="card">
+                    <div class="card-header header-elements-inline">
+                        <h5 class="card-title">{% trans "Class information" %}</h5>
+                        <div class="header-elements">
+                            <div class="list-icons">
+                                <a class="list-icons-item" data-action="collapse"></a>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <form action="" class="bg-white p-5 contact-form" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{ form|crispy }}
+
+                            <div class="form-group text-right">
+
+                                <input type="submit" value='{% trans "Update" %}' class="btn btn-primary py-2 px-5">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+    </div>
+
+
+
+
+
+
+
+
+{% endblock content %}
+
+
+
+
+{% block project_js %}
+  {{ block.super }}
+
+{% endblock project_js %}
+

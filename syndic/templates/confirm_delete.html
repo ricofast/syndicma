@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content_title %}
+  <h2 class="h3">{% trans "Confirmation" %}</h2>
+{% endblock content_title %}
+
+{% block content %}
+  <ul class="list-group">
+    <li class="list-group-item p-4">
+      <form method="post">{% csrf_token %}
+        <p>{% trans "Are you sure you want to delete" %} "{{ object }}"?</p>
+        <input type="submit" class="btn btn-primary" value={% trans "Confirm" %} >
+      </form>
+    </li>
+  </ul>
+{% endblock content %}

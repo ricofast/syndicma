@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block content_title %}
+    <h2 class="h3">{% trans "Classes" %}</h2>
+
+
+{% endblock content_title %}
+
+
+{% block css %}
+    {{ block.super }}
+
+{% endblock css %}
+
+{% block content %}
+    <div class="page-header">
+				<div class="page-header-content header-elements-md-inline">
+					<div class="page-title d-flex">
+						<h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">{% trans "Home" %}</span> - {% trans "Classes Menu" %}</h4>
+						<a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
+					</div>
+
+
+				</div>
+    </div>
+
+    <div class="d-md-flex align-items-md-start justify-content-center">
+        <div class="tab-content w-md-75">
+
+
+
+
+                <div class="card">
+                    <div class="card-header header-elements-inline">
+
+
+
+                            <h6 class="card-title">{% trans "List of Classes" %}</h6>
+                            {% if user.regadmin or user.is_superadmin %}
+                             <a class=" btn btn-primary mb-4 btn"
+                                        href="{% url 'institut:classcreate' %}">{% trans "Create a Class" %}</a>
+                            {% endif %}
+								<div class="header-elements">
+									<div class="list-icons">
+				                		<a class="list-icons-item" data-action="collapse"></a>
+				                		<a class="list-icons-item" data-action="reload"></a>
+{#				                		<a class="list-icons-item" data-action="remove"></a>#}
+				                	</div>
+			                	</div>
+
+                        </div>
+
+
+                    <div class="card-body">
+
+
+                        <p class="card-text">
+                        {% regroup object_list by grade as grades %}
+                            {% for grad in grades %}
+                                <h5 class="h5 mt-3 bg-teal-400" >{{ grad.grouper }}</h5>
+                             <ul class="list-group" style="background-color: #fafafa; ">
+                            {% for classe in grad.list %}
+                            <div class="container-fluid">
+                            <div class="row align-items-center" style="border-bottom: 1px solid rgba(0,0,0,.125); background-color: white"">
+                            <div class="col-md-5 ">
+                                <div class="d-flex align-items-center">
+                                    <div class="mr-3">
+                                        <a class="btn bg-transparent border-primary text-primary rounded-round border-2 btn-icon" href="{% url 'institut:classedit' classe.pk %}">
+                                            <i class="icon-magazine"></i>
+                                        </a>
+                                    </div>
+                                    <div>
+                                    {% if user.is_regadmin or user.is_superadmin %}
+                                        <a href="{% url 'institut:classedit' classe.pk %}" class="text-default font-weight-semibold letter-icon-title">{{ classe }}</a>
+                                    {% elif user.is_professor %}
+                                        <a href="{% url 'institut:profclasse' classe.pk %}" class="text-default font-weight-semibold letter-icon-title">{{ classe }}</a>
+                                    {% endif %}
+                                        <div class="text-muted font-size-sm"><span class="badge badge-mark border-blue mr-1">
+                                            {% if classe.active %}
+                                                </span>{% trans "Active" %}
+                                             {% else %}
+                                                </span>{% trans "Not Active" %}
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+
+{#                                <a href="{% url 'institut:classedit' classe.pk %}"> {{ classe }}</a>#}
+                            </div>
+                            <div class="col-md-6">
+                                    <div class="font-weight-semibold">{{ classe.description|slice:":50" }}...</div>
+                            </div>
+                            <div class="col-md-1">
+                                {% if user.regadminor or user.is_superadmin %}
+                                <div class="list-icons">
+													<div class="dropdown">
+														<a href="#" class="list-icons-item dropdown-toggle caret-0" data-toggle="dropdown"><i class="icon-menu7"></i></a>
+														<div class="dropdown-menu dropdown-menu-right">
+															<a href="{% url 'institut:classdelete' classe.pk %}" class="dropdown-item"><i class="icon-trash"></i> {% trans "Delete" %}</a>
+															<a href="{% url 'institut:classedit' classe.pk %}" class="dropdown-item"><i class="icon-pencil"></i> {% trans "Edit" %}</a>
+
+														</div>
+													</div>
+                                </div>
+                                {% endif %}
+
+
+                            </div>
+                            </div>
+                            </div>
+                                <br>
+
+                            {% endfor %}
+                        </ul>
+                        {% empty %}
+                                <li class="list-group-item">{% trans "No Classes yet." %}</li>
+                        {% endfor %}
+                        </p>
+                    </div>
+                    <div class="card-footer">
+
+
+                    </div>
+                </div>
+
+
+
+        </div>
+    </div>
+
+
+{% endblock content %}

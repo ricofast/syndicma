@@ -1,0 +1,727 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block head_title %}
+    <title>{% trans "Schedulling" %} {{ acayear }}</title>
+{% endblock %}
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href={% static "vendor/Limitless_2_3/global_assets/js/plugins/fullcalender/main.min.css" %} >
+
+    <style>
+
+  body {
+
+    font-size: 14px;
+    font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+  }
+
+  #external-events {
+
+    left: 2px;
+    top: 20px;
+    width: 250px;
+    padding: 0 1px;
+    border: 1px solid #ccc;
+    background: #eee;
+    text-align: left;
+  }
+
+  #external-events h4 {
+    font-size: 16px;
+    margin-top: 0;
+    padding-top: 1em;
+  }
+
+  #external-events .fc-event {
+    margin: 3px 0;
+    cursor: move;
+  }
+
+  #external-events p {
+    margin: 1.5em 0;
+    font-size: 11px;
+    color: #666;
+  }
+
+  #external-events p input {
+    margin: 0;
+    vertical-align: middle;
+  }
+
+  #calendar-wrap {
+    margin-left: 20px;
+  }
+
+  #calendar {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+</style>
+{% endblock css %}
+{% block content %}
+    <!-- Page header -->
+    <div class="page-header">
+        <div class="page-header-content header-elements-md-inline">
+            <div class="page-title d-flex">
+                <h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">{% trans "Home" %}</span> - {% trans "Calendar" %} </h4>
+                <a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
+
+            </div>
+            <div id="course-added-alert" class="alert alert-success alert-styled-right alert-arrow-right alert-dismissible d-none">
+                    <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
+                    <span class="font-weight-semibold">Well done! Course has been added successfully</span>
+                </div>
+
+            {% comment %}<div class="header-elements d-none text-center text-md-left mb-3 mb-md-0">
+						<div class="btn-group">
+							<button type="button" class="btn bg-indigo-400"><i class="icon-stack2 mr-2"></i> New report</button>
+							<button type="button" class="btn bg-indigo-400 dropdown-toggle" data-toggle="dropdown"></button>
+							<div class="dropdown-menu dropdown-menu-right">
+								<div class="dropdown-header">Actions</div>
+								<a href="#" class="dropdown-item"><i class="icon-file-eye"></i> View reports</a>
+								<a href="#" class="dropdown-item"><i class="icon-file-plus"></i> Edit reports</a>
+								<a href="#" class="dropdown-item"><i class="icon-file-stats"></i> Statistics</a>
+								<div class="dropdown-header">Export</div>
+								<a href="#" class="dropdown-item"><i class="icon-file-pdf"></i> Export to PDF</a>
+								<a href="#" class="dropdown-item"><i class="icon-file-excel"></i> Export to CSV</a>
+							</div>
+						</div>
+					</div>{% endcomment %}
+        </div>
+    </div>
+    <!-- /page header -->
+
+    <div class="d-md-flex align-items-md-start justify-content-center" id='wrap'>
+        <div class="sidebar sidebar-light bg-transparent sidebar-component sidebar-component-left wmin-300 border-0 shadow-0 sidebar-expand-md">
+            <div class="sidebar-content">
+                <div class="card">
+                    <div class="card-header bg-transparent header-elements-inline">
+                        <span class="card-title font-weight-semibold">{% trans "Filter" %}</span>
+                        <div class="header-elements">
+                            <div class="list-icons">
+                                <a class="list-icons-item" data-action="collapse"></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+
+                        <div class="mb-3" id="external-events">
+                            <h6>Courses</h6>
+                            <div id='external-events-list'>
+                                {% for course in courses %}
+
+                                <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
+                                    <div class='fc-event-main'>{{ course.id }}-{{ course }} - {{ course.classe }}</div>
+                                </div>
+                                {% endfor %}
+
+                            </div>
+
+                            <p>
+                                <input type='checkbox' id='drop-remove' />
+                                <label for='drop-remove'>remove after drop</label>
+                            </p>
+                        </div>
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-content w-100">
+            <div class="tab-pane fade active show" id="profile">
+                <!-- Profile info -->
+                <div class="card">
+                    <div class="card-header header-elements-inline">
+                        <h5 class="card-title">{{ classe }} </h5>
+                        <div class="header-elements">
+                            <div class="list-icons">
+                                <a class="list-icons-item" data-action="collapse"></a>
+                                <a class="list-icons-item" data-action="reload"></a>
+                                <a class="list-icons-item" data-action="remove"></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <div id='calendar-wrap'>
+                            <div id='calendar'></div>
+                            {% csrf_token %}
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+                <div id="myModal" class="modal fade" tabindex="-1">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header bg-info">
+								<h5 class="modal-title">{% trans "Add a Course to Schedule" %}</h5>
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+							</div>
+
+
+								<div class="modal-body">
+                                <form class="new-event--form">
+									<div class="form-group">
+										<div class="row">
+											<div class="col-sm-6">
+												<label>{% trans "Course" %}</label>
+                                                <select class="form-control new-event--title">
+                                                    {% for course in courses %}
+                                                        <option value="{{ course.id }}">{{ course.title }}</option>
+                                                    {% endfor %}
+                                                </select>
+
+											</div>
+
+
+										</div>
+									</div>
+                                <div class="form-group event-tag">
+                                            <label class="form-control-label d-block mb-3">{% trans "Course color" %}</label>
+                                    <div class="row">
+
+                                            <div class="col-md-1 border border-primary rounded">
+                                            <div class="form-check">
+												<label class="form-check-label" >
+													<input type="radio" name="event-tag" value="#2196F3" class="form-check-input-styled-primary" checked data-fouc>
+
+												</label>
+											</div>
+                                            </div>
+                                            <div class="col-md-1 border border-danger rounded">
+											<div class="form-check">
+												<label class="form-check-label">
+													<input type="radio" name="event-tag" value="#F44336" class="form-check-input-styled-danger" data-fouc>
+
+												</label>
+											</div>
+                                                </div>
+                                            <div class="col-md-1 border border-success rounded">
+
+											<div class="form-check">
+												<label class="form-check-label">
+													<input type="radio" name="event-tag" value="#4CAF50" class="form-check-input-styled-success" data-fouc>
+
+												</label>
+											</div>
+                                            </div>
+                                            <div class="col-md-1 border border-warning rounded">
+											<div class="form-check">
+												<label class="form-check-label">
+													<input type="radio" name="event-tag" value="#FF7043" class="form-check-input-styled-warning" data-fouc>
+
+												</label>
+											</div>
+                                            </div>
+                                            <div class="col-md-1 border border-info rounded">
+											<div class="form-check">
+												<label class="form-check-label">
+													<input type="radio" name="event-tag" value="#00BCD4" class="form-check-input-styled-info" data-fouc>
+
+												</label>
+											</div>
+                                                </div>
+                                            <div class="col-md-1 border border-dark rounded">
+                                            <div class="form-check">
+												<label class="form-check-label">
+													<input type="radio" name="event-tag" value="#673AB7" class="form-check-input-styled-custom" data-fouc>
+
+												</label>
+											</div>
+                                            </div>
+
+                                        </div>
+                                </div>
+                                <input type="hidden" class="new-event--start" />
+                                <input type="hidden" class="new-event--end" />
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-link" data-dismiss="modal">{% trans "Close" %}</button>
+                                        <button type="submit" class="btn bg-primary new-event--add">{% trans "Create" %}</button>
+                                    </div>
+                                </form>
+                                </div>
+
+						</div>
+					</div>
+				</div>
+
+    <div id="editModal" class="modal fade" tabindex="-1">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header bg-info">
+								<h5 class="modal-title">{% trans "Edit a Schedule" %}</h5>
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+							</div>
+
+
+								<div class="modal-body">
+                                <form class="edit-event--form">
+									<div class="form-group">
+										<div class="row">
+											<div class="col-sm-6">
+												<label>{% trans "Course" %}</label>
+                                                <select class="form-control edit-event--title">
+                                                    {% for course in courses %}
+                                                        <option value="{{ course.id }}-{{ course.title }}">{{ course.title }}</option>
+                                                    {% endfor %}
+                                                </select>
+
+											</div>
+
+
+										</div>
+									</div>
+                                <div class="form-group event-tag">
+                                            <label class="form-control-label d-block mb-3">{% trans "Course color" %}</label>
+                                    <div class="row">
+
+                                            <div class="col-md-1 border border-primary rounded">
+                                            <div class="form-check">
+												<label class="form-check-label" >
+													<input type="radio" name="event-tag" value="#2196F3" class="form-check-input-styled-primary" checked data-fouc>
+
+												</label>
+											</div>
+                                            </div>
+                                            <div class="col-md-1 border border-danger rounded">
+											<div class="form-check">
+												<label class="form-check-label">
+													<input type="radio" name="event-tag" value="#F44336" class="form-check-input-styled-danger" data-fouc>
+
+												</label>
+											</div>
+                                                </div>
+                                            <div class="col-md-1 border border-success rounded">
+
+											<div class="form-check">
+												<label class="form-check-label">
+													<input type="radio" name="event-tag" value="#4CAF50" class="form-check-input-styled-success" data-fouc>
+
+												</label>
+											</div>
+                                            </div>
+                                            <div class="col-md-1 border border-warning rounded">
+											<div class="form-check">
+												<label class="form-check-label">
+													<input type="radio" name="event-tag" value="#FF7043" class="form-check-input-styled-warning" data-fouc>
+
+												</label>
+											</div>
+                                            </div>
+                                            <div class="col-md-1 border border-info rounded">
+											<div class="form-check">
+												<label class="form-check-label">
+													<input type="radio" name="event-tag" value="#00BCD4" class="form-check-input-styled-info" data-fouc>
+
+												</label>
+											</div>
+                                                </div>
+                                            <div class="col-md-1 border border-dark rounded">
+                                            <div class="form-check">
+												<label class="form-check-label">
+													<input type="radio" name="event-tag" value="#673AB7" class="form-check-input-styled-custom" data-fouc>
+
+												</label>
+											</div>
+                                            </div>
+
+                                        </div>
+                                </div>
+                                <input type="hidden" class="edit-event--id" />
+                                <input type="hidden" class="edit-event--start" />
+                                <input type="hidden" class="edit-event--end" />
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-link" data-dismiss="modal">{% trans "Close" %}</button>
+{#                                        <button type="submit" class="btn bg-primary edit-event--add">{% trans "Create" %}</button>#}
+                                        <button class="btn btn-primary" data-calendar="update">{% trans "Update" %}</button>
+                                        <button class="btn btn-danger" data-calendar="delete">{% trans "Delete" %}</button>
+                                    </div>
+                                </form>
+                                </div>
+
+						</div>
+					</div>
+				</div>
+{% endblock content %}
+
+
+{% block project_js %}
+    {{ block.super }}
+
+
+    <script>
+
+     document.addEventListener('DOMContentLoaded', function() {
+
+    var containerEl = document.getElementById('external-events-list');
+    new FullCalendar.Draggable(containerEl, {
+      itemSelector: '.fc-event',
+      eventData: function(eventEl) {
+        return {
+          title: eventEl.innerText.trim(),
+        }
+      }
+    });
+
+    //// the individual way to do it
+    // var containerEl = document.getElementById('external-events-list');
+    // var eventEls = Array.prototype.slice.call(
+    //   containerEl.querySelectorAll('.fc-event')
+    // );
+    // eventEls.forEach(function(eventEl) {
+    //   new FullCalendar.Draggable(eventEl, {
+    //     eventData: {
+    //       title: eventEl.innerText.trim(),
+    //     }
+    //   });
+    // });
+
+    /* initialize the calendar
+    -----------------------------------------------------------------*/
+         var el = document.getElementsByName("csrfmiddlewaretoken");
+         csrf_value = el[0].getAttribute("value");
+         var calendarEl = document.getElementById('calendar');
+
+         var calendar = new FullCalendar.Calendar(calendarEl, {
+             headerToolbar: {
+                 left: '',
+                 center: '',
+                 right: 'timeGridWeek'
+             },
+
+             initialDate: '2019-12-30',
+             navLinks: true, // can click day/week names to navigate views
+             selectable: true,
+             selectMirror: true,
+             initialView: 'timeGridWeek',
+             hiddenDays: [ 0 ],
+             dayHeaderFormat: { weekday: 'short' },
+             droppable: true, // this allows things to be dropped onto the calendar
+             editable: true,
+             dayMaxEvents: true, // allow "more" link when too many events
+             allDaySlot: false,
+             slotMinTime: "07:00:00",
+            slotLabelFormat: [
+            {
+                hour: 'numeric',
+                minute: '2-digit',
+                meridiem: false
+            }
+            ],
+
+             drop: function(arg) {
+                 // is the "remove after drop" checkbox checked?
+                 if (document.getElementById('drop-remove').checked) {
+                     // if so, remove the element from the "Draggable Events" list
+                     arg.draggedEl.parentNode.removeChild(arg.draggedEl);
+                 }
+             },
+            eventReceive: function(arg) { // called when a proper external event is dropped
+
+                 var start = moment(arg.event.start);
+                 var end = start.clone().add(1, 'hour');
+                 var str = arg.event.title;
+                 var strx = str.split("-");
+                 var title = strx[1];
+                 var courseid = strx[0];
+                 //console.log(start.format('d'));
+                 {#var id = arg.event.id;#}
+                 $.ajax({
+                         type: "GET",
+                         url: '/institut/add_event',
+                         data: {'courseid':courseid, 'courseday': start.format('d'), 'title': start.format('ddd'), 'start': start.format('Y-MM-DD HH:mm:ss'), 'end': end.format('Y-MM-DD HH:mm:ss'), 'starttime': start.format('HH:mm:ss'), 'endtime': end.format('HH:mm:ss'), csrfmiddlewaretoken: csrf_value},
+                         dataType: "json",
+                         success: function (json) {
+                             new PNotify({
+                                    title: 'Formidable !!',
+                                    text: 'Cours ajouté avec succès ',
+                                    type: 'success',
+                                    icon: 'icon-checkmark3'
+                             });
+                             //$("#course-added-alert").removeClass("d-none");
+                                setTimeout(
+                                function()
+                                {
+
+                                    calendar.refetchEvents();
+                                   // location.reload();
+                                }, 0001);
+
+                            // alert("Added Successfully");
+                         },
+                         failure: function (json) {
+                             alert('There is a problem!!!');
+                         }
+                 });
+
+             },
+             select: function(arg) {
+                 $("#myModal").modal();
+                 $('.new-event--title').val('');
+				 $('.new-event--start').val(arg.start);
+				 $('.new-event--end').val(arg.end);
+                 //var title = prompt("Enter Event Title");
+
+             },
+             eventResize: function(arg) {
+                 var start = moment(arg.event.start);
+                 var end = moment(arg.event.end);
+                 var title = arg.event.title;
+                 var id = arg.event.id;
+                 $.ajax({
+                     type: "GET",
+                     url: '/institut/update',
+                     data: {'courseday': start.format('d'), 'title': title, 'start': start.format('Y-MM-DD HH:mm:ss'), 'end': end.format('Y-MM-DD HH:mm:ss'), 'starttime': start.format('HH:mm:ss'), 'endtime': end.format('HH:mm:ss'), 'id': id, csrfmiddlewaretoken: csrf_value},
+                     dataType: "json",
+                     success: function (json) {
+                         new PNotify({
+                                    title: 'Attention !!',
+                                    text: '     Calendrier du cours modifié',
+                                    icon: 'icon-warning22'
+                             });
+                         calendar.refetchEvents();
+
+                         //alert('Event Update');
+                     },
+                     failure: function (json) {
+                         alert('There is a problem!!!');
+                     }
+                 });
+             },
+
+             eventDrop: function (arg) {
+                 var start = moment(arg.event.start);
+                 var end = moment(arg.event.end);
+                 var title = arg.event.title;
+                 var id = arg.event.id;
+
+                 $.ajax({
+                     type: "GET",
+                     url: '/institut/update',
+                     data: {'title': title, 'courseday': start.format('d'), 'start': start.format('Y-MM-DD HH:mm:ss'), 'end': end.format('Y-MM-DD HH:mm:ss'), 'starttime': start.format('HH:mm:ss'), 'endtime': end.format('HH:mm:ss'), 'id': id},
+                     dataType: "json",
+                     success: function (json) {
+                         new PNotify({
+                                    title: 'Attention !!',
+                                    text: '     Calendrier du cours modifié',
+                                    icon: 'icon-warning22'
+                             });
+                        calendar.refetchEvents();
+
+
+                        // alert('Event Update');
+                     },
+                     failure: function (json) {
+                         alert('There is a problem!!!');
+                     }
+                 });
+             },
+
+             eventClick: function (arg) {
+                 $("#editModal").modal();
+                 //$('.new-event--title').val('');
+				 $('.edit-event--start').val(arg.event.start);
+				 $('.edit-event--end').val(arg.event.end);
+				 $('.edit-event--id').val(arg.event.id);
+
+
+             },
+         eventTimeFormat: { // like '14:30:00'
+            hour: '2-digit',
+            minute: '2-digit',
+            meridiem: false
+          },
+
+            events: [
+                 {% for event in object_list %}
+                     {
+                         title: '{{ event.name }}',
+                         start: '{{ event.start | date:"Y-m-d H:i" }}',
+                         end: '{{ event.end | date:"Y-m-d H:i" }}',
+                         id: '{{ event.id }}',
+                         color: '{{event.type}}',
+
+
+                     },
+                 {% endfor%}
+
+            ],
+
+         });
+
+         calendar.render();
+
+
+
+         var lang = $('#language').val();
+
+         if (lang == "en"){
+             calendar.setOption('locale','en');}
+         if (lang == "fr" ){
+             calendar.setOption('locale','fr');}
+          if (lang == "ar" ){
+             calendar.setOption('locale','ar-ma');}
+         if (lang == "es" ) {
+             calendar.setOption('locale', 'es');
+         }
+     });
+     $('body').on('click', '.new-event--add', function() {
+			var courseid = $('.new-event--title').val();
+            var start = moment($('.new-event--start').val());
+            var end = moment($('.new-event--end').val());
+            var type = $('.event-tag input:checked').val()
+            //console.log(start.format('d'));
+            //var end = start.clone().add(1, 'hour');
+			// Generate ID
+
+			if (courseid != '') {
+                     $.ajax({
+                         type: "GET",
+                         url: '/institut/add_event',
+                         data: {'courseid': courseid, 'courseday': start.format('d'), 'start': start.format('Y-MM-DD HH:mm:ss'), 'end': end.format('Y-MM-DD HH:mm:ss'), 'starttime': start.format('HH:mm:ss'), 'endtime': end.format('HH:mm:ss'), 'type': type, csrfmiddlewaretoken: csrf_value},
+                         dataType: "json",
+                         success: function (json) {
+                             new PNotify({
+                                    title: 'Formidable!!',
+                                    text: 'Cours ajouté avec succès ',
+                                    type: 'success',
+                                    icon: 'icon-checkmark3'
+                             });
+                             console.log("Success");
+                             $("#course-added-alert").removeClass("d-none");
+                             setTimeout(
+                                function()
+                                {
+                                   calendar.refetchEvents();
+                                   //location.reload();
+                                }, 0001);
+
+
+                             alert("Added Successfully");
+                         },
+                         failure: function (json) {
+                             alert('There is a problem!!!');
+                         }
+                     });
+
+
+				$('.new-event--form')[0].reset();
+				$('.new-event--title').closest('.form-group').removeClass('has-danger');
+				$('#new-event').modal('hide');
+			} else {
+				$('.new-event--title').closest('.form-group').addClass('has-danger');
+				$('.new-event--title').focus();
+			}
+		});
+
+     $('body').on('click', '[data-calendar]', function() {
+			var calendarAction = $(this).data('calendar');
+			var currentId = $('.edit-event--id').val();
+			var currentTitle = $('.edit-event--title').val();
+			var start = moment($('.edit-event--start').val());
+            var end = moment($('.edit-event--end').val());
+            var str = currentTitle;
+            var strx = str.split("-");
+            var title = strx[1];
+            var courseid = strx[0];
+			var type = $('#editModal .event-tag input:checked').val();
+			console.log(courseid);
+			//var currentEvent = calendar.fullCalendar('clientEvents', currentId)
+
+			//var currentEvent = calendar.getEventById( currentId );
+
+			//Update
+			if (calendarAction === 'update') {
+				if (currentTitle != '') {
+					//currentEvent[0].title = currentTitle;
+					//currentEvent[0].color = type;
+                    $.ajax({
+                     type: "GET",
+                     url: '/institut/update',
+                     data: {'courseid': courseid, 'courseday': start.format('d'), 'title': title, 'id': currentId, 'type': type, 'start': start.format('Y-MM-DD HH:mm:ss'), 'end': end.format('Y-MM-DD HH:mm:ss'), 'starttime': start.format('HH:mm:ss'), 'endtime': end.format('HH:mm:ss')},
+                     dataType: "json",
+                     success: function (json) {
+                         new PNotify({
+                                    title: 'Attention!!',
+                                    text: 'Calendrier du cours modifié',
+                                    icon: 'icon-warning22'
+                             });
+                         setTimeout(
+                                function()
+                                {
+                                    location.reload();
+                                }, 0001);
+                        calendar.refetchEvents();
+
+                        // alert('Event Update');
+                     },
+                     failure: function (json) {
+                         alert('There is a problem!!!');
+                     }
+                 });
+
+
+					//calender.currentEvent.setProp("color", type);
+					$('#edit-event').modal('hide');
+				} else {
+					$('.edit-event--title').closest('.form-group').addClass('has-error');
+					$('.edit-event--title').focus();
+				}
+			}
+
+			//Delete
+			if (calendarAction === 'delete') {
+				$('#edit-event').modal('hide');
+
+				// Show confirm dialog
+				if (confirm("Are you sure you want to remove it?")) {
+
+                     $.ajax({
+                         type: "GET",
+                         url: '/institut/remove',
+                         data: {'id': currentId},
+                         dataType: "json",
+                         success: function (data) {
+                            setTimeout(
+                                function()
+                                {
+                                    location.reload();
+                                }, 0001);
+                            calendar.refetchEvents();
+
+
+                         },
+                         failure: function (data) {
+                             alert('There is a problem!!!');
+                         }
+                     });
+                 }
+			}
+		});
+    </script>
+    {#<script src={% static "vendor/Limitless_2_3/global_assets/js/plugins/forms/styling/switchery.min.js" %}></script>#}
+    <script src={% static "vendor/moment/moment.js" %}></script>
+    <script src={% static "vendor/Limitless_2_3/global_assets/js/plugins/fullcalender/main.min.js" %}></script>
+
+    {% comment %}<script src={% static "vendor/Limitless_2_3/global_assets/js/plugins/ui/fullcalendar/daygrid/main.min.js" %}></script>
+	<script src={% static "vendor/Limitless_2_3/global_assets/js/plugins/ui/fullcalendar/timegrid/main.min.js" %}></script>
+	<script src={% static "vendor/Limitless_2_3/global_assets/js/plugins/ui/fullcalendar/list/main.min.js" %}></script>
+	<script src={% static "vendor/Limitless_2_3/global_assets/js/plugins/ui/fullcalendar/interaction/main.min.js" %}></script>
+	<script src={% static "vendor/Limitless_2_3/global_assets/js/plugins/ui/fullcalendar/core/locales/ar.js" %}></script>{% endcomment %}
+
+{#   <script src={% static "vendor/Limitless_2_3/assets/js/calender.js" %}></script>#}
+    {#	<script src={% static "vendor/Limitless_2_3/global_assets/js/demo_pages/fullcalendar_advanced.js" %}></script>#}
+
+    {#	<script src={% static "vendor/Limitless_2_3/global_assets/js/demo_pages/datatables_extension_select.js" %}></script>#}
+
+{% endblock project_js %}

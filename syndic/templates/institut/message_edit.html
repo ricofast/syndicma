@@ -1,0 +1,283 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+
+{% block content_title %}
+  <h2 class="h3">{% trans "Messages" %}</h2>
+{% endblock content_title %}
+{% block css %}
+    {{ block.super }}
+
+{% endblock css %}
+
+
+{% block content %}
+        <div class="page-header">
+				<div class="page-header-content header-elements-md-inline">
+					<div class="page-title d-flex">
+						<h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">{% trans "Messages" %}</h4>
+						<a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
+					</div>
+
+
+				</div>
+    </div>
+    <div class="row">
+ <div class="col-md-4">
+ <div class="card">
+								<div class="card-header bg-transparent header-elements-inline">
+									<span class="card-title font-weight-semibold">{% trans "Latest Messages" %}</span>
+									<div class="header-elements">
+										<span class="badge bg-success badge-pill">{{ messages_count }}</span>
+			                		</div>
+								</div>
+
+								<div class="card-body">
+									<ul class="media-list">
+                                    {% for message in messages %}
+										<li class="media">
+											<a href="#" class="mr-3">
+
+                                                <div class="ml-3 align-self-center">
+													<span class="icon-envelop5"></span>
+                                                </div>
+
+
+											</a>
+											<div class="media-body">
+												<a href="#" class="media-title font-weight-semibold">{{ message.subject }}</a>
+												<div class="font-size-sm text-muted">
+                                                    {{ message.receiver }}
+{#                                                {{ message.text|slice:":40" }}...#}
+                                                </div>
+											</div>
+                                            <a href="#" class="mr-3">
+											<div class="ml-3 align-self-center" data-message="{{ message.id }}" id="{{ message.id }}">
+												<span class="icon-trash"></span>
+											</div>
+                                            </a>
+										</li>
+                                    {% endfor %}
+
+									</ul>
+								</div>
+
+								<div class="card-footer d-flex justify-content-between align-items-center py-2">
+									<a href="{% url 'institut:messages_list' %}" class="text-grey">
+										{% trans "All Messages" %}
+									</a>
+
+									<div>
+										<a href="{% url 'institut:messages_list' %}" class="text-grey" data-popup="tooltip" title="List of Messages"><i class="icon-comment"></i></a>
+
+									</div>
+								</div>
+							</div>
+ </div>
+
+        <div class="col-md-8">
+            <div class="tab-pane fade active show" >
+                <!-- Profile info -->
+                <div class="card">
+                    <div class="card-header header-elements-inline">
+                        <h5 class="card-title">{% trans "Send a Message" %}</h5>
+                        <div class="header-elements">
+                            <div class="list-icons">
+                                <a class="list-icons-item" data-action="collapse"></a>
+                                <a class="list-icons-item" data-action="reload"></a>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <form class="bg-white p-5 contact-form" id="notifyform" data-branches-url= "{% url 'institut:load_students' %}"  enctype="multipart/form-data">
+
+                        <div class="form-group" >
+                            <p>{% trans "Classes*" %}</p>
+                            <select data-placeholder="Select a Class..." class="form-control" name="classe" id="id_classe">
+                                {% for classe in classes %}
+                                    <option value="{{classe.id}}">{{classe}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+
+                            <p>{% trans "Student*" %}</p>
+
+                            <div class="form-group" >
+                                <select multiple="multiple"  class="form-control select id_student" name="student" id="id_student" data-fouc>
+
+
+                                </select>
+                                <label class="col-form-label d-none" id="studentlabel" style="color: #ea1c0d">{% trans "At least one student must be selected " %}</label>
+                            </div>
+{#                        {{ form|crispy }}#}
+                            <div class="row" style="border: 1px solid #f0f0f0; background: #f5f5f5">
+                                <div class="col">
+                                    <label class="col-form-label col-lg-4">{% trans "Message" %}</label>
+                                    <div class="form-group row">
+
+									<div class="col-lg-12">
+										<div class="input-group">
+											<span class="input-group-prepend">
+												<span class="input-group-text bg-primary border-primary text-white">
+													<i class="icon-envelop4"></i>
+												</span>
+											</span>
+											<input type="text" maxlength="50" class="form-control border-left-0 messasgesubject" placeholder={% trans "Subject" %}>
+
+                                        </div>
+                                        <label class="col-form-label d-none" id="subjectlabel" style="color: #ea1c0d">{% trans "A message subject is needed" %}</label>
+									</div>
+								</div>
+
+                                    <div class="form-group">
+                                        <textarea rows="3" cols="3" maxlength="250" class="form-control messagetext" placeholder={% trans " Message"  %}></textarea>
+                                    <label class="col-form-label d-none" id="textlabel" style="color: #ea1c0d">{% trans "The message text is missing" %}</label>
+                                    </div>
+                                </div>
+                            </div>
+                        <br>
+                            <div class="form-group text-right">
+                              <input type="button" value='{% trans "Send" %}' class="btn btn-primary py-2 px-5 sendmessage">
+                            </div>
+                          </form>
+                    </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+    </div>
+
+
+
+
+
+{% endblock content %}
+
+
+
+
+{% block project_js %}
+
+
+<script src={% static "vendor/Limitless_2_3/global_assets/js/plugins/forms/selects/select2.min.js" %}></script>
+<script src={% static "vendor/Limitless_2_3/global_assets/js/plugins/extensions/jquery_ui/interactions.min.js" %}></script>
+
+{{ block.super }}
+    <script src={% static "vendor/Limitless_2_3/global_assets/js/demo_pages/form_select2.js" %}></script>
+<script src={% static "vendor/Limitless_2_3/global_assets/js/plugins/forms/styling/uniform.min.js" %}></script>
+
+
+    <script>
+    $(document).ready(function () {
+        $("#id_classe").change(function () {
+          var url = $("#notifyform").attr("data-branches-url");
+
+          var classeid = $(this).val();
+
+
+              $.ajax({
+                  url: url,
+                  data: {
+                      'classe': classeid
+                  },
+                  success: function (data) {
+                      $('.id_student').html(data);
+                  }
+              });
+
+
+        });
+
+        $("#id_student").change(function () {
+           var $studentlist = $(this).val();
+
+           if ($studentlist.includes("all") && $studentlist.length>1)
+           {
+               console.log($studentlist);
+               $(this).val("all").trigger('change');
+           }
+
+        });
+    });
+
+
+    $('body').on('click', '.sendmessage', function() {
+			var studentid = $('.id_student').val();
+            var subject = $('.messasgesubject').val();
+            var text = $('.messagetext').val();
+            var classid = $('#id_classe').val();
+
+            if (studentid.length == 0) {
+                $("#studentlabel").removeClass("d-none");
+            }
+            else if (!subject) {
+                $("#subjectlabel").removeClass("d-none");
+            }
+            else if (!text) {
+                $("#textlabel").removeClass("d-none");
+            }
+            else {
+                     $.ajax({
+                         type: "GET",
+                         url: '/institut/save_message',
+                         data: {'subject': subject, 'text': text, 'studentid': studentid, 'classid': classid},
+                         dataType: "json",
+                         success: function (json) {
+                            setTimeout(
+                                function()
+                                {
+                                    location.reload();
+                                }, 0001);
+                         },
+                         failure: function (json) {
+                             alert('There is a problem!!!');
+                         }
+                     });
+                    $("#id_student").val(null).trigger('change');
+                    $("#id_classe").val(null).trigger('change');
+                }
+
+                {#alert("Student must be chosen");#}
+
+
+    });
+
+document.addEventListener('DOMContentLoaded', function() {
+     var el = document.getElementsByName("csrfmiddlewaretoken");
+         csrf_value = el[0].getAttribute("value");
+
+ });
+$('body').on('click', '[data-message]', function() {
+            var messageid = $(this).data('message');
+            $.ajax({
+                type: "GET",
+                url: '/institut/deletemessage',
+                data: {'messageid': messageid},
+                dataType: "json",
+                success: function (json) {
+                    setTimeout(
+                        function()
+                        {
+                            location.reload();
+                        }, 0001);
+                },
+                failure: function (json) {
+                    alert('There is a problem!!!');
+                }
+            });
+
+});
+
+  </script>
+
+
+{% endblock project_js %}
+

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block content_title %}
+  <h2 class="h3">{% trans "Profile" %}</h2>
+{% endblock content_title %}
+
+{% block content %}
+  <form action="" class="bg-white p-5 contact-form" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <a class="btn btn-outline-primary mb-3" href="{% url "account_email" %}" role="button">{% trans "Manage emails" %}</a>
+    {{ formset.management_form }}
+    {{ form|crispy }}
+    {% for profile_form in formset %}
+      {{ profile_form|crispy }}
+    {% endfor %}
+    <div class="form-group">
+      <input type="submit" value='{% trans "Update" %}' class="btn btn-primary py-3 px-5">
+    </div>
+  </form>
+{% endblock content %}

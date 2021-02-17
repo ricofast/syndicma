@@ -1,0 +1,91 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+{% comment %}{% load account socialaccount %}
+{% providers_media_js %}{% endcomment %}
+{% load crispy_forms_tags %}
+{% block head_title %}
+    <meta name="description" content="">
+        <meta name="author" content="edussy.com">
+
+        <title>{% trans "Edussy.com [Sign In]" %}</title>
+{% endblock %}
+{% block content_title %}
+    <div class="text-center">
+        <h2 class="h3">{% trans "Sign In" %}</h2>
+        <p>{% blocktrans %}If you have not created an account yet, then please
+            <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}</p>
+    </div>
+{% endblock %}
+
+{% block content %}
+
+
+
+    {% comment %}{% get_providers as socialaccount_providers %}
+
+{% if socialaccount_providers %}
+<p>{% blocktrans with site.name as site_name %}Please sign in with one
+of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
+for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
+
+<div class="socialaccount_ballot">
+
+  <ul class="socialaccount_providers">
+    {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+  </ul>
+
+  <div class="login-or">{% trans 'or' %}</div>
+
+</div>
+
+{% include "socialaccount/snippets/login_extra.html" %}
+
+{% endif %}{% endcomment %}
+
+<div class="content d-flex justify-content-center align-items-center">
+
+				<!-- Login form -->
+				 <form action="{% url 'account_login' %}" class="login-form" method="POST">
+                    {% csrf_token %}
+
+					<div class="card mb-0">
+						<div class="card-body">
+							<div class="text-center mb-3">
+								<i class="icon-reading icon-2x text-slate-300 border-slate-300 border-3 rounded-round p-3 mb-3 mt-1"></i>
+								<h5 class="mb-0">{% trans "Login to your account" %}</h5>
+								<span class="d-block text-muted">{% trans "Enter your credentials below" %}</span>
+							</div>
+                                {{ form|crispy }}
+                                {% if redirect_field_value %}
+                                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                                {% endif %}
+							{% comment %}<div class="form-group form-group-feedback form-group-feedback-left">
+
+								<div class="form-control-feedback">
+									<i class="icon-user text-muted"></i>
+								</div>
+							</div>
+
+							<div class="form-group form-group-feedback form-group-feedback-left">
+								<input type="password" class="form-control" placeholder="Password">
+								<div class="form-control-feedback">
+									<i class="icon-lock2 text-muted"></i>
+								</div>
+							</div>{% endcomment %}
+
+							<div class="form-group">
+								<button type="submit" class="btn btn-primary btn-block">{% trans 'Sign In' %} <i class="icon-circle-right2 ml-2"></i></button>
+							</div>
+
+							<div class="text-center">
+								<a href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+							</div>
+						</div>
+					</div>
+				</form>
+				<!-- /login form -->
+
+			</div>
+
+{% endblock %}

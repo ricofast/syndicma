@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% load embed_video_tags %}
+
+{% block content_title %}
+  <h2 class="h2 mb-0">{{ course }} {% trans "handouts" %} </h2>
+  {% if user.professor %}
+    <a class="btn  btn-primary" href="{% url 'courses:handouts:create' course.pk %}" role="button">
+      {% trans "Create handout" %}
+    </a>
+  {% endif %}
+{% endblock content_title %}
+
+{% block content %}
+  {% regroup object_list by section as sections %}
+  {% for section in sections %}
+    <h4 class="h4 mt-3">{{ section.grouper }}</h4>
+    <ul class="list-group">
+      {% for handout in section.list %}
+        <li class="list-group-item">
+          <a href="{% url 'courses:handouts:edit' handout.pk %}"></a>
+          <span><b>{{ handout.name }}</b></span>
+          {% if user.professor %}
+            <a class="btn btn-outline-danger btn-sm float-right mr-2"
+               href="{% url 'courses:handouts:delete' handout.pk %}"
+               role="button"><span class="oi oi-trash"></span></a>
+            <a class="btn btn-outline-info btn-sm float-right mr-2" href="{% url 'courses:handouts:edit' handout.pk %}"
+               role="button"><span class="oi oi-pencil "></span></a>
+          {% endif %}
+            {% if handout.attachment %}
+                 <a class="btn btn-outline-info btn-sm float-right mr-2" href="{{ handout.attachment.url }}"
+                     role="button" download><span class="oi oi-data-transfer-download"></span></a>
+            {% endif %}
+            {% if handout.link %}
+                {% comment %}<a class="btn btn-outline-info btn-sm float-right mr-2" href="{{ handout.link }}"
+                    role="button" download><span class="oi oi-data-transfer-download"></span></a>{% endcomment %}
+                {% video handout.link 'small' %}
+            {% endif %}
+          <div>{{ handout.description }}</div>
+        </li>
+      {% endfor %}
+    </ul>
+  {% empty %}
+    <ul class="list-group">
+      <li class="list-group-item">{% trans "No handouts yet." %}</li>
+    </ul>
+  {% endfor %}
+{% endblock content %}

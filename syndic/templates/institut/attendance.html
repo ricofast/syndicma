@@ -1,0 +1,564 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+
+{% block content_title %}
+    <h2 class="h3" xmlns="http://www.w3.org/1999/html">{% trans "Attendance" %}</h2>
+{% endblock content_title %}
+{% block css %}
+    {{ block.super }}
+
+{% endblock css %}
+
+
+{% block content %}
+        <div class="page-header">
+				<div class="page-header-content header-elements-md-inline">
+					<div class="page-title d-flex">
+						<h4 class="d-none d-lg-block"><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold"></span> {{ course }}: {% trans "Attendance" %}</h4>
+						<h6 class="d-lg-none"><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold"></span> {{ course }}: {% trans "Attendance" %}</h6>
+					</div>
+
+
+				</div>
+    </div>
+
+        <div class="row">
+            <div class="col-xl-3">
+
+                <!-- Navigation -->
+							<div class="card">
+								<div class="card-body bg-slate-400 text-center card-img-top" style="background-size: contain;">
+                                    <a href="{% url 'institut:classcalender' classe.pk %}">
+									<div class="card-img-actions d-inline-block mb-3">
+                                        <img class="img-fluid " src="{% static "images/calendar.png" %}" width="120" height="120" alt="">
+
+									</div>
+
+						    		<h6 class="font-weight-semibold mb-0" style="color: #ffffff">{{ classe }} </h6>
+						    		<span class="d-block opacity-75" style="color: #ffffff">{% trans " Class Schedule" %}</span>
+                                    </a>
+
+
+						    	</div>
+
+
+							</div>
+							<!-- /navigation -->
+
+
+
+                <!-- List of courses -->
+                <div class="card">
+                    <div class="card-header bg-transparent header-elements-inline">
+                        <span class="card-title font-weight-semibold">{% trans "Select a date" %}</span>
+                        <div class="header-elements">
+                            <div class="list-icons">
+                                <a class="list-icons-item" data-action="collapse"></a>
+                            </div>
+                        </div>
+                    </div>
+                    <form action="" method="get" id="coursetime-form">
+                    <div class="card-body">
+
+                       <input type="date" class="form-control attendancedate">
+
+                    <hr>
+                    <label>{% trans "Course Time" %}</label>
+
+                        <select class="coursetime-status">
+                            <option value="none">{% trans "Choose a time" %}</option>
+
+                        </select>
+                        <input type="hidden" class="attendance-day" />
+                        <input type="hidden" class="attendance-date" />
+                        <input type="hidden" class="course-time" />
+                    </div>
+                    <div class="card-footer text-center">
+                        <button type="button" class="btn bg-teal-400 time-select" >{% trans "Select a Time" %}</button>
+                    </div>
+                </form>
+                </div>
+                <!-- /List of courses -->
+                <!-- List of students -->
+							<div class="card">
+								<div class="card-header bg-transparent header-elements-inline">
+									<span class="card-title font-weight-semibold">{% trans "Students List" %}</span>
+									<div class="header-elements">
+										<span class="badge bg-success badge-pill">{{ student_count }}</span>
+			                		</div>
+								</div>
+
+								<div class="card-body">
+									<ul class="media-list">
+                                    {% for student in students %}
+										<li class="media">
+											<a href="#" class="mr-3">
+                                                {% if student.picture %}
+												    <img src="{{ student.picture.url }}" width="36" height="36" class="rounded-circle" alt="">
+                                                {% else %}
+                                                    <i class="icon-reading"></i>
+                                                {% endif %}
+											</a>
+											<div class="media-body">
+												<a href="#" class="media-title font-weight-semibold">{{ student.user.last_name }} {{ student.user.first_name }}</a>
+												<div class="font-size-sm text-muted">
+                                                {% if student.user.is_active %}
+                                                    {% trans "Active" %}
+                                                {% else %}
+                                                    {% trans "Innactive" %}
+                                                {% endif %}
+                                                </div>
+											</div>
+											<div class="ml-3 align-self-center">
+												<span class="badge badge-mark border-success"></span>
+											</div>
+										</li>
+                                    {% endfor %}
+
+									</ul>
+								</div>
+
+								<div class="card-footer d-flex justify-content-between align-items-center py-2">
+									<a href="#" class="text-grey">
+										{% trans "All students" %}
+									</a>
+
+									<div>
+										<a href="#" class="text-grey" data-popup="tooltip" title="Conference room"><i class="icon-comment"></i></a>
+										<a href="#" class="text-grey ml-2" data-popup="tooltip" title="Settings"><i class="icon-gear"></i></a>
+									</div>
+								</div>
+							</div>
+							<!-- /online users -->
+
+
+
+            </div>
+
+
+        <div class="col-xl-9">
+
+                <!-- Profile info -->
+                <div class="card">
+                    <div class="card-header header-elements-inline">
+                        <h5 class="card-title d-none d-lg-block">{% trans "Student List" %}</h5>
+                        <div class="actualdate "></div>
+                        <div class="course-time-display">[{{ coursetime.starttime|date:"l"  }} {{ coursetime.starttime }}:{{ coursetime.endtime }}]</div>
+{#                        <div class="">{{ ncoursetimes }}</div>#}
+                        <div class="header-elements">
+                            <div class="list-icons">
+                                <a class="list-icons-item" data-action="collapse"></a>
+                                {% comment %}<a class="list-icons-item" data-action="reload"></a>
+                                <a class="list-icons-item" data-action="remove"></a>{% endcomment %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <table class="table datatable-button-html5-basic" id="studentlist">
+						<thead>
+							<tr>
+								<th>{% trans "First Name" %}</th>
+								<th>{% trans "Last Name" %}</th>
+								<th>{% trans "Attendance" %}</th>
+								<th>{% trans "Status" %}</th>
+
+							</tr>
+						</thead>
+						<tbody>
+                        {% for student in students%}
+							<tr>
+								<td>{{ student.user.first_name }}</td>
+								<td>{{ student.user.last_name }}</td>
+
+								<td><button type="button" class="btn btn-primary py-1 px-2" data-student="{{ student.id }}" id="{{ student.id }}">{% trans "Attendance" %}</button></td>
+								<td>
+                                    {% for attendance in attendance_list %}
+                                                {% if attendance.student.id == student.pk %}
+                                                    {% if attendance.status == "U" %}
+
+                                                            {% trans "Unexcused" %}
+
+                                                        {% elif attendance.status == "E" %}
+
+                                                            {% trans "Excused" %}
+
+                                                        {% elif attendance.status == "L" %}
+
+                                                            {% trans "Late" %}
+
+                                                    {% endif %}
+                                                {% endif %}
+                                            {% endfor %}
+                                    <div id="student-status-alert" class="alert alert-warning alert-styled-right alert-arrow-right d-none">
+
+
+                                    </div>
+                                </td>
+
+							</tr>
+                        {% endfor %}
+                            </tbody>
+					</table>
+                    </div>
+
+                <!-- /profile info -->
+
+
+            </div>
+        </div>
+         </div>
+
+
+<div id="myModal" class="modal fade" tabindex="-1">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header bg-info">
+								<h5 class="modal-title">{% trans "Attendance" %}</h5>
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+							</div>
+
+
+								<div class="modal-body">
+                                <form class="new-event--form">
+									<div class="form-group">
+										<div class="row">
+											<div class="col-sm-6">
+												<label>{% trans "Attendance" %}</label>
+                                                <select class="form-control new-event--status">
+
+                                                    <option value="E">{% trans "Excused Absence" %}</option>
+                                                    <option value="U">{% trans "Unexcused Absence" %}</option>
+                                                    <option value="L">{% trans "Late" %}</option>
+
+                                                </select>
+
+											</div>
+
+
+										</div>
+									</div>
+
+                                <input type="hidden" class="new-event--studentid" />
+                                <input type="hidden" class="new-event--coursetimeid" />
+                                <input type="hidden" class="new-event--coursedate" />
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-link" data-dismiss="modal">{% trans "Close" %}</button>
+                                        <button type="submit" class="btn bg-primary new-event--add">{% trans "Create" %}</button>
+                                    </div>
+                                </form>
+                                </div>
+
+						</div>
+					</div>
+				</div>
+
+
+
+
+
+{% endblock content %}
+
+
+
+
+{% block project_js %}
+  {{ block.super }}
+<script src={% static "vendor/Limitless_2_3/global_assets/js/plugins/tables/datatables/datatables.min.js" %}></script>
+	<script src={% static "vendor/Limitless_2_3/global_assets/js/plugins/forms/selects/select2.min.js" %}></script>
+    <script src={% static "vendor/Limitless_2_3/assets/js/datatables_attendance.js" %}></script>
+	<script src={% static "vendor/Limitless_2_3/global_assets/js/plugins/tables/datatables/extensions/jszip/jszip.min.js" %}></script>
+	<script src={% static "vendor/Limitless_2_3/global_assets/js/plugins/tables/datatables/extensions/pdfmake/pdfmake.min.js" %}></script>
+	<script src={% static "vendor/Limitless_2_3/global_assets/js/plugins/tables/datatables/extensions/pdfmake/vfs_fonts.min.js" %}></script>
+	<script src={% static "vendor/Limitless_2_3/global_assets/js/plugins/tables/datatables/extensions/buttons.min.js" %}></script>
+
+
+	<script src={% static "vendor/Limitless_2_3/global_assets/js/demo_pages/datatables_extension_buttons_html5.js" %}></script>
+
+
+ <script>
+ document.addEventListener('DOMContentLoaded', function() {
+     var el = document.getElementsByName("csrfmiddlewaretoken");
+         csrf_value = el[0].getAttribute("value");
+
+
+         {% comment %}var lang = $('#language').val();
+        console.log(lang);
+         if (lang == "en"){
+             moment.locale('en');
+         }
+         if (lang == "fr" ){
+            console.log(lang);
+             moment.locale('fr', {
+                     weekdays : [
+                        "Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"
+                     ]
+            });}
+         if (lang == "ar" ){
+             moment.locale('ar');}
+         if (lang == "es" ){
+            moment.locale('es');
+            }{% endcomment %}
+
+ });
+$('body').on('click', '[data-student]', function() {
+            var studentid = $(this).data('student');
+
+            if (localStorage.getItem('attenddate')) {
+                var actualdate = localStorage.getItem('attenddate');
+            }
+            else {
+                var actualdate= $('.attendance-date').val();
+            }
+            if (localStorage.getItem('crstime')) {
+                var coursetime = localStorage.getItem('crstime');
+            }
+            else {
+                var coursetime = $('.course-time').val();
+            }
+
+
+            if (coursetime === 'none'){
+                alert('You must select a Course time!!');
+            }
+            else {
+			$("#myModal").modal();
+            $('.new-event--studentid').val(studentid);
+            $('.new-event--coursedate').val(actualdate);
+            $('.new-event--coursetimeid').val(coursetime);
+            }
+});
+$('body').on('change', '.attendancedate', function() {
+            var lang = $('#language').val();
+            var start = moment($('.attendancedate').val());
+
+            $(".actualdate").empty().append(langue(start, lang));
+            $(".actualdate").append(' ');
+            $(".actualdate").append(start.format('DD/MM/Y'));
+            $(".attendance-date").val(start.format('dddd DD MMM Y'));
+            $(".attendance-day").val(start.format('dddd'));
+            var coursetimeday = langue(start, lang);
+            var crtimeday= start.format('d');
+            localStorage.setItem('attenddate', start.format('dddd DD MMM Y'));
+
+            var crtimes =[
+                {% for coursetime in coursetimes %}
+                    {% if not forloop.first %},{% endif %}
+                    {
+                        pk: "{{ coursetime.pk }}",
+                        name: "{{ coursetime.name }}",
+                        start: "{{ coursetime.start }}",
+                        end: "{{ coursetime.end }}",
+                        starttime: "{{ coursetime.starttime }}",
+                        endtime: "{{ coursetime.endtime }}",
+                        courseday: "{{ coursetime.courseday }}"
+                    }
+                {% endfor %}
+            ];
+                $('.coursetime-status').empty();
+                $('.coursetime-status').append($('<option>', {
+                    value: 'none',
+                    text: 'Choose a time'
+                    }));
+            for (var i =0; i<crtimes.length; i++){
+                if (crtimes[i]['courseday'] == crtimeday)
+                {
+                  $('.coursetime-status').append($('<option>', {
+                    value: crtimes[i]['pk'],
+                    text: coursetimeday + ' ' + crtimes[i]['starttime'] + '-' + crtimes[i]['endtime']
+                    }));
+                }
+            }
+
+
+});
+
+$('body').on('change', '.coursetime-status', function() {
+            var coursetime = $('.coursetime-status').val();
+            localStorage.setItem('crstime', coursetime);
+            $(".course-time").val(coursetime);
+
+
+});
+
+$('body').on('click', '.time-select', function() {
+            var coursetime = $('.coursetime-status').val();
+            //moment.locale('fr');
+            if (!coursetime){
+                if (localStorage.getItem('crstime')) {
+                    coursetime = localStorage.getItem('crstime');
+                }
+            }
+            if (localStorage.getItem('attenddate')) {
+                var actualdate = moment(localStorage.getItem('attenddate'));
+            }
+            let form = $("#coursetime-form");
+            var lang = $('#language').val();
+
+        //console.log(lang);
+        //console.log(actualdate);
+        //console.log(actualdate.format('Y-MM-DD'));
+         {% comment %}if (lang == "en"){
+             url = '/institut/attendance/' + coursetime + '/' + actualdate.format('YYYY-MM-DD') + '/';
+         }
+         if (lang == "fr" ){
+            url = '/institut/attendance/' + coursetime + '/' + actualdate.format('YYYY-MM-DD') + '/';
+         }
+         if (lang == "ar" ){
+
+         }
+         if (lang == "es" ){
+
+            }{% endcomment %}
+            url = '/institut/attendance/' + coursetime + '/' + actualdate.format('Y-MM-DD') + '/';
+            if (coursetime != 'none'){
+                //console.log(url);
+                location.href= url;
+            }
+
+});
+
+
+$('body').on('click', '.new-event--add', function() {
+			var studentid = $('.new-event--studentid').val();
+            var coursetimeid = $('.new-event--coursetimeid').val();
+            var attendancedate = moment($('.new-event--coursedate').val());
+            var status = $('.new-event--status').val();
+            $('.attendance-date').val(attendancedate);
+            $('.course-time').val(coursetimeid);
+            $(".course-time-display").empty().append(coursetimeid);
+            //console.log(studentid);
+            //console.log(coursetimeid);
+            //console.log(attendancedate);
+            //console.log(status);
+            //var end = start.clone().add(1, 'hour');
+			// Generate ID
+
+			if (status != '') {
+                     $.ajax({
+                         type: "GET",
+                         url: '/institut/add_attendance',
+                         data: {'coursetimeid': coursetimeid, 'studentid': studentid, 'attendancedate': attendancedate.format('Y-MM-DD'), 'status': status},
+                         dataType: "json",
+                         success: function (json) {
+                            console.log("Success");
+                         },
+                         failure: function (json) {
+                             alert('There is a problem!!!');
+                         }
+                     });
+
+
+				$('.new-event--form')[0].reset();
+				$('.nnew-attendance--status').closest('.form-group').removeClass('has-danger');
+				$('#new-event').modal('hide');
+			} else {
+				$('.new-attendance--status').closest('.form-group').addClass('has-danger');
+				$('.new-attendance--status').focus();
+			}
+});
+
+
+window.langue = function(start, code){
+    //var code = $('#language').val();
+    //var start = moment($('.attendancedate').val());
+    var daydate = parseInt(start.format('e'));
+
+    var day = '';
+             if (code === "en") {
+
+                 switch (daydate) {
+                     case 0:
+                         day = "Sunday";
+                         break;
+                     case 1:
+                         day = "Monday";
+                         break;
+                     case 2:
+                         day = "Tuesday";
+                         break;
+                     case 3:
+                         day = "Wednesday";
+                         break;
+                     case 4:
+                         day = "Thursday";
+                         break;
+                     case 5:
+                         day = "Friday";
+                         break;
+                     case 6:
+                         day = "Saturday";
+                         break;
+                 }
+             }
+             if (code === "fr") {
+                 switch (daydate) {
+                     case 0:
+                         day = "Dimanche";
+                         break;
+                     case 1:
+                         day = "Lundi";
+                         break;
+                     case 2:
+                         day = "Mardi";
+                         break;
+                     case 3:
+                         day = "Mercredi";
+                         break;
+                     case 4:
+                         day = "Jeudi";
+                         break;
+                     case 5:
+                         day = "Vendredi";
+                         break;
+                     case 6:
+                         day = "Samedi";
+                 }
+             }
+            if (code === "ar") {
+                 switch (daydate) {
+                     case 0:
+                         day = "الأحد";
+                         break;
+                     case 1:
+                         day = "الاثنين";
+                         break;
+                     case 2:
+                         day = "الثلاثاء";
+                         break;
+                     case 3:
+                         day = "الأربعاء";
+                         break;
+                     case 4:
+                         day = "الخميس";
+                         break;
+                     case 5:
+                         day = "الجمعة";
+                         break;
+                     case 6:
+                         day = "السبت";
+                 }
+             }
+
+             return day
+         };
+
+$( document ).ready(function() {
+    if (localStorage.getItem('attenddate')) {
+                var start = moment(localStorage.getItem('attenddate'));
+                var lang = $('#language').val();
+
+
+            $(".actualdate").empty().append(langue(start, lang));
+            $(".actualdate").append(' ');
+            $(".actualdate").append(start.format('DD/MM/Y'));
+
+            }
+
+
+});
+ </script>
+{% endblock project_js %}
+

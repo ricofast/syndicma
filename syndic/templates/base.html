@@ -1,0 +1,870 @@
+{% load i18n %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="icon" href ="{% static "favicon.ico" %}" type="image/x-icon" />
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	    {% block head_title %}
+        <meta name="description" content="">
+        <meta name="author" content="edussy.com">
+
+        <title>Edussy.com</title>
+    {% endblock %}
+
+{% block css %}
+	<!-- Global stylesheets -->
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
+	<link type="text/css" rel="stylesheet" href={% static "vendor/Limitless_2_3/global_assets/css/icons/icomoon/styles.min.css" %}>
+	<link rel="stylesheet" type="text/css" href={% static "vendor/Limitless_2_3/assets/css/bootstrap.min.css" %}>
+	<link rel="stylesheet" type="text/css" href={% static "vendor/Limitless_2_3/assets/css/bootstrap_limitless.min.css" %}>
+	<link rel="stylesheet" type="text/css" href={% static "vendor/Limitless_2_3/assets/css/layout.min.css" %}>
+	<link rel="stylesheet" type="text/css" href={% static "vendor/Limitless_2_3/assets/css/components.min.css" %}>
+	<link rel="stylesheet" type="text/css" href={% static "vendor/Limitless_2_3/assets/css/colors.min.css" %}>
+    <link rel="stylesheet" type="text/css" href={% static "vendor/jquery-ui-1.12.1/jquery-ui.min.css" %}>
+    <link rel="stylesheet" type="text/css" href={% static "vendor/sweetalert2/dist/sweetalert2.min.css" %}>
+    <link type="text/css" rel="stylesheet" href={% static "vendor/Limitless_2_3/global_assets/css/icons/fontawesome/styles.min.css" %}>
+    <link rel="stylesheet" href="{% static "css/schedule.css" %}" type="text/css" media="screen">
+	<!-- /global stylesheets -->
+
+{% endblock css %}
+
+
+
+</head>
+
+<body>
+
+	<!-- Main navbar -->
+	<div class="navbar navbar-expand-md navbar-light">
+
+		<!-- Header with logos -->
+		<div class="navbar-header navbar-dark d-none d-md-flex align-items-md-center">
+			<div class="navbar-brand navbar-brand-md">
+				<a href="{% url 'institut:search' %}" class="d-inline-block">
+					<img src="{% static "images/logo_icony32.png" %}" width ="117px" height="50px"  alt="">
+				</a>
+			</div>
+
+			<div class="navbar-brand navbar-brand-xs">
+				<a href="{% url 'institut:search' %}" class="d-inline-block">
+					<img src="{% static "images/logo_icony3.png" %}" width ="40px" height="40px" alt="">
+				</a>
+			</div>
+		</div>
+		<!-- /header with logos -->
+
+
+		<!-- Mobile controls -->
+		<div class="d-flex flex-1 d-md-none">
+			<div class="navbar-brand mr-auto">
+				<a href="{% url 'institut:search' %}" class="d-inline-block">
+					<img src="{% static "images/logo_icony33.png" %}" width ="124px" height="50px" alt="">
+				</a>
+			</div>
+
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-mobile">
+				<i class="icon-tree5"></i>
+			</button>
+
+			<button class="navbar-toggler sidebar-mobile-main-toggle" type="button">
+				<i class="icon-paragraph-justify3"></i>
+			</button>
+		</div>
+		<!-- /mobile controls -->
+
+
+		<!-- Navbar content -->
+		<div class="collapse navbar-collapse" id="navbar-mobile">
+			<ul class="navbar-nav">
+				<li class="nav-item">
+					<a href="#" class="navbar-nav-link sidebar-control sidebar-main-toggle d-none d-md-block">
+						<i class="icon-paragraph-justify3"></i>
+					</a>
+				</li>
+            {% if user.is_regadmin %}
+				<li class="nav-item dropdown">
+					<a href="#" class="navbar-nav-link dropdown-toggle caret-0" data-toggle="dropdown">
+						<i class="icon-people"></i>
+						<span class="d-md-none ml-2">Users</span>
+						<span class="badge badge-mark border-pink-400 ml-auto ml-md-0"></span>
+					</a>
+
+					<div class="dropdown-menu dropdown-content wmin-md-300">
+						<div class="dropdown-content-header">
+
+							    <span class="font-weight-semibold">{% trans "Users online" %}</span>
+
+
+
+							<a href="#" class="text-default"><i class="icon-search4 font-size-base"></i></a>
+						</div>
+
+						<div class="dropdown-content-body dropdown-scrollable">
+
+							<ul class="media-list">
+                                <li class="bg-light"  style="font-weight: bold">{% trans "Students" %}</li>
+                                {% for onlineuser in loggedin %}
+
+                                    {% if onlineuser.user.is_student %}
+                                        <li class="media">
+                                            <div class="mr-3">
+                                                <i class="icon-people"></i>
+                                            </div>
+
+                                            <div class="media-body">
+                                                <a href="#" class="media-title font-weight-semibold">{{ onlineuser.user.first_name }} </a>
+
+                                                <span class="d-block text-muted font-size-sm">
+                                                    {% trans "student" %}
+                                                </span>
+
+
+
+                                            </div>
+                                            <div class="ml-3 align-self-center"><span class="badge badge-mark border-success"></span></div>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+                            <hr>
+                            <li class="bg-light"  style="font-weight: bold">{% trans "Professors" %}</li>
+                            {% for onlineuser in loggedin %}
+                                    {% if onlineuser.user.is_professor %}
+                                                        <li class="media">
+                                            <div class="mr-3">
+                                                <i class="icon-people"></i>
+                                            </div>
+
+                                            <div class="media-body">
+                                                <a href="#" class="media-title font-weight-semibold">{{ onlineuser.user.first_name }} </a>
+
+                                                <span class="d-block text-muted font-size-sm">
+                                                    {% trans "professor" %}
+                                                </span>
+
+
+
+                                            </div>
+                                            <div class="ml-3 align-self-center"><span class="badge badge-mark border-success"></span></div>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+                            <hr>
+                                      <li class="bg-light"  style="font-weight: bold">{% trans "Parents" %}</li>
+                            {% for onlineuser in loggedin %}
+                                    {% if onlineuser.user.is_parent %}
+                                                        <li class="media">
+                                            <div class="mr-3">
+                                                <i class="icon-people"></i>
+                                            </div>
+
+                                            <div class="media-body">
+                                                <a href="#" class="media-title font-weight-semibold">{{ onlineuser.user.first_name }} </a>
+
+                                                <span class="d-block text-muted font-size-sm">
+                                                    {% trans "Parent" %}
+                                                </span>
+
+
+
+                                            </div>
+                                            <div class="ml-3 align-self-center"><span class="badge badge-mark border-success"></span></div>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+                            <hr>
+                            <li class="bg-light" style="font-weight: bold">{% trans "Admins" %}</li>
+                            {% for onlineuser in loggedin %}
+                                    {% if onlineuser.user.is_regadmin %}
+                                        <li class="media">
+                                            <div class="mr-3">
+                                                <i class="icon-people"></i>
+                                            </div>
+
+                                            <div class="media-body">
+                                                <a href="#" class="media-title font-weight-semibold">{{ onlineuser.user.first_name }} </a>
+
+                                                <span class="d-block text-muted font-size-sm">
+                                                    {% trans "Admin" %}
+                                                </span>
+
+
+
+                                            </div>
+                                            <div class="ml-3 align-self-center"><span class="badge badge-mark border-success"></span></div>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                            </div>
+
+						<div class="dropdown-content-footer bg-light">
+							<a href="#" class="text-grey mr-auto">All users</a>
+							<a href="#" class="text-grey"><i class="icon-gear"></i></a>
+						</div>
+                    </div>
+                    	</li>
+
+                        {% elif user.is_parent %}
+                <li class="nav-item dropdown">
+					<a href="#" class="navbar-nav-link dropdown-toggle caret-0" data-toggle="dropdown">
+						<i class="icon-people"></i>
+						<span class="d-md-none ml-2">Users</span>
+						<span class="badge badge-mark border-pink-400 ml-auto ml-md-0"></span>
+					</a>
+                    <div class="dropdown-menu dropdown-content wmin-md-300">
+						<div class="dropdown-content-header">
+
+
+
+                                <span class="font-weight-semibold">{% trans "My Children" %}</span>
+
+
+						</div>
+
+						<div class="dropdown-content-body dropdown-scrollable">
+                        <ul class="media-list">
+
+                                {% for onlineuser in loggedin %}
+
+
+                                        <li class="media">
+                                            <div class="mr-3">
+                                                <i class="icon-people"></i>
+                                            </div>
+
+                                            <div class="media-body">
+                                                <a href="#" class="media-title font-weight-semibold" data-kid="{{ onlineuser.id }}" id="{{ onlineuser.id }}">{{ onlineuser.user.first_name }} </a>
+
+                                                <span class="d-block text-muted font-size-sm">
+                                                    {% trans "student" %}
+                                                </span>
+
+
+
+                                            </div>
+                                            <div class="ml-3 align-self-center"><span class="badge badge-mark border-success"></span></div>
+                                        </li>
+
+                                {% endfor %}
+
+
+                            </ul>
+                            </div>
+                    </div>
+                </li>
+                        {% endif %}
+
+            </ul>
+
+
+                            {% if user.is_regadmin %}
+							    <span class="badge bg-pink-400 badge-pill ml-md-3 mr-md-auto">{{ loggedin|length }} {% trans "Users" %}</span>
+                            {% elif user.is_parent %}
+                                <span class="badge bg-pink-400 badge-pill ml-md-3 mr-md-auto">{% trans "Active:" %} {{ kid }} </span>
+                            {% endif %}
+
+{% if user.is_authenticated %}
+  			<ul class="navbar-nav">
+				<li class="nav-item dropdown">
+					<a href="#" class="navbar-nav-link dropdown-toggle caret-0" data-toggle="dropdown">
+						<i class="icon-calendar2 "></i>
+						<span class="ml-2">{% trans "Term: " %}</span>
+
+					</a>
+
+					<div class="dropdown-menu dropdown-content wmin-md-300">
+
+
+						<div class="dropdown-content-body dropdown-scrollable">
+
+                        <ul class="media-list">
+
+                                {% for ayear in acayears %}
+
+
+                                        <li class="media">
+                                            <div class="mr-3">
+                                                <i class="icon-calendar22 "></i>
+                                            </div>
+
+                                            <div class="media-body">
+                                                <a href="#" class="media-title font-weight-semibold" data-ayear="{{ ayear.id }}" id="{{ ayear.id }}">{{ ayear.name }}-{{ ayear.term }} </a>
+
+
+
+
+
+                                            </div>
+
+                                        </li>
+
+                                {% endfor %}
+
+
+                            </ul>
+                            </div>
+
+
+
+
+                    </div>
+				</li>
+			</ul>
+
+        <span class="badge bg-teal-400 badge-pill ml-md-3 mr-md-auto">{{ acayear.name }} {{ acayear.term }} </span>
+{% endif %}
+			<ul class="navbar-nav">
+				<li class="nav-item dropdown">
+
+                    {% get_current_language as LANGUAGE_CODE %}
+                    {% get_language_info for LANGUAGE_CODE as lang %}
+                    {% get_available_languages as LANGUAGES %}
+                    {% get_language_info_list for LANGUAGES as languages %}
+
+                    <form action="{% url 'set_language' %}" method="post" id="change-language-form">
+                        {% csrf_token %}
+                        <input name="next" type="hidden" value="{{ redirect_to }}">
+                        <input type="hidden" value="{{ lang.code }}" name="language" id="language"/>
+                    </form>
+
+					<a href="#" class="navbar-nav-link dropdown-toggle" data-toggle="dropdown" data-target="#collapseLanguages">
+                        {% with "images/"|add:lang.code|add:".png" as imagestatic %}
+                         &nbsp;<img src="{% static imagestatic %}" class="img-flag mr-2" alt="Languages">&nbsp;{{ lang.name_local }}
+                    {% endwith %}
+
+					</a>
+
+					<div class="dropdown-menu dropdown-menu-right" id="collapseLanguages">
+
+                        {% for language in languages %}
+                            {% with "images/"|add:language.code|add:".png" as imagestatic %}
+                                {% if language.name_local == lang.name_local  %}
+                                         <a class="dropdown-item active change-language" href="#"
+                                            data-lang-code="{{ language.code }}"> <img src="{% static imagestatic %}"
+                                            class="img-flag" alt=""> {{ language.name_local }} ({{ language.code }})</a>
+                                {% else %}
+                                    <a class="dropdown-item change-language" href="#"
+                                            data-lang-code="{{ language.code }}"> <img src="{% static imagestatic %}"
+                                            class="img-flag" alt=""> {{ language.name_local }} ({{ language.code }})</a>
+                                {% endif %}
+                            {% endwith %}
+                        {% endfor %}
+
+
+
+
+					</div>
+				</li>
+
+
+{% if user.is_authenticated %}
+				<li class="nav-item dropdown">
+					<a href="#" class="navbar-nav-link dropdown-toggle caret-0" data-toggle="dropdown">
+						<i class="icon-bubbles4"></i>
+						<span class="d-md-none ml-2">Messages</span>
+                          {% comment %}{% if user.parent %}
+						    <span class="badge badge-danger badge-pill">{{ pa_notify|length }}</span>
+                          {% elif user.student %}{% endcomment %}
+                              <span class="badge badge-danger badge-pill">{{ pa_notify|length }}</span>
+{#                           {% endif %}#}
+
+					</a>
+
+					<div class="dropdown-menu dropdown-menu-right dropdown-content wmin-md-350">
+						<div class="dropdown-content-header">
+							<span class="font-weight-semibold">{% trans "Messages" %}</span>
+{#							<a href="#" class="text-default"><i class="icon-compose"></i></a>#}
+						</div>
+
+						<div class="dropdown-content-body dropdown-scrollable">
+
+                        {% regroup pa_notify|dictsort:'type' by type as types %}
+
+                            {% for nottype in types %}
+                                {% if nottype.grouper == "A" %}
+                                    <p class="bg-light" style="border-bottom: 1px solid darkgrey; font-weight: bold">{% trans "Absences" %}</p>
+                                {% elif nottype.grouper == "G" %}
+                                    <p class="bg-light" style="border-bottom: 1px solid darkgrey; font-weight: bold">{% trans "Grades" %}</p>
+                                {% elif nottype.grouper == "O" %}
+                                    <p class="bg-light" style="border-bottom: 1px solid darkgrey; font-weight: bold">{% trans "Outline" %}</p>
+                                {% elif nottype.grouper == "W" %}
+                                    <p class="bg-light" style="border-bottom: 1px solid darkgrey; font-weight: bold">{% trans "Work" %}</p>
+                                {% elif nottype.grouper == "M" %}
+                                    <p class="bg-light" style="border-bottom: 1px solid darkgrey; font-weight: bold">{% trans "New Messages" %}</p>
+                                {% endif %}
+                                    <ul class="media-list">
+        {#                            {% if user.parent %}#}
+
+                                        {% for pnotif in nottype.list %}
+                                            <li class="media">
+                                                <div class="mr-3 position-relative">
+                                                    <i class="icon-bell3 text-danger"></i>
+                                                </div>
+
+                                                <div class="media-body">
+                                                    <div class="media-title">
+                                                        <a href="#">
+                                                            <span class="font-weight-semibold" style="font-weight: bold">{{ pnotif.course }} </span>
+                                                            <span class="font-weight-semibold " >- ({{ pnotif.student.user.first_name }})</span>
+                                                            <span class="text-muted float-right font-size-sm">{{ pnotif.notifydate|date:"d/m" }}</span>
+                                                        </a>
+                                                    </div>
+
+                                                    <span class="text-muted">{{ pnotif.text }}</span>
+                                                </div>
+                                            </li>
+                                        {% endfor %}
+
+
+                                    </ul>
+                            {% empty %}
+                                <span class="text-muted">{% trans "No messages" %}</span>
+
+                            {% endfor %}
+						</div>
+
+						<div class="dropdown-content-footer bg-light">
+							<a href="#" class="text-grey mr-auto">All messages</a>
+							<div>
+								<a href="#" class="text-grey" data-popup="tooltip" title="Mark all as read"><i class="icon-radio-unchecked"></i></a>
+								<a href="#" class="text-grey ml-2" data-popup="tooltip" title="Settings"><i class="icon-cog3"></i></a>
+							</div>
+						</div>
+					</div>
+				</li>
+{% endif %}
+				<li class="nav-item dropdown dropdown-user">
+                {% if user.is_authenticated %}
+					<a href="#" class="navbar-nav-link d-flex align-items-center dropdown-toggle" data-toggle="dropdown">
+                        {% if user.profile.picture %}
+						<img src="{{ user.profile.picture.url }}" class="rounded-circle mr-2" height="34" alt="">
+                        {% endif %}
+						<span>{{ user.first_name }}</span>
+					</a>
+
+					<div class="dropdown-menu dropdown-menu-right">
+						<a href="{% url "profiles:profile" %}" class="dropdown-item"><i class="icon-user-plus"></i> My profile</a>
+						<a href="#" class="dropdown-item"><i class="icon-coins"></i> My balance</a>
+						<a href="#" class="dropdown-item"><i class="icon-comment-discussion"></i> Messages <span class="badge badge-pill bg-indigo-400 ml-auto">58</span></a>
+						<div class="dropdown-divider"></div>
+						<a href="#" class="dropdown-item"><i class="icon-cog5"></i> Account settings</a>
+						<a href="#" class="dropdown-item" data-toggle="modal" data-target="#logoutModal"><i class="icon-switch2"></i> Logout</a>
+                    </div>
+                {% else %}
+                    <a href="#" class="navbar-nav-link d-flex align-items-center dropdown-toggle" data-toggle="dropdown">
+                        <i class="icon-user">&nbsp;</i>
+						<span> {% trans "Log in" %}</span>
+					</a>
+
+					<div class="dropdown-menu dropdown-menu-right">
+						<a href="{% url 'account_login' %}" class="dropdown-item"><i class="icon-user-check"></i> Sign in</a>
+						<div class="dropdown-divider"></div>
+						<a href="{% url 'account_signup' %}" class="dropdown-item"><i class="icon-user-plus"></i> Sign up</a>
+
+                    </div>
+                {% endif %}
+				</li>
+			</ul>
+		</div>
+		<!-- /navbar content -->
+
+	</div>
+	<!-- /main navbar -->
+
+
+	<!-- Page content -->
+	<div class="page-content">
+{% if user.is_authenticated %}
+		<!-- Main sidebar -->
+		<div class="sidebar sidebar-dark sidebar-main sidebar-expand-md">
+
+			<!-- Sidebar mobile toggler -->
+			<div class="sidebar-mobile-toggler text-center">
+				<a href="#" class="sidebar-mobile-main-toggle">
+					<i class="icon-arrow-left8"></i>
+				</a>
+				Navigation
+				<a href="#" class="sidebar-mobile-expand">
+					<i class="icon-screen-full"></i>
+					<i class="icon-screen-normal"></i>
+				</a>
+			</div>
+			<!-- /sidebar mobile toggler -->
+
+
+			<!-- Sidebar content -->
+			<div class="sidebar-content">
+
+				<!-- User menu -->
+				<div class="sidebar-user">
+					<div class="card-body">
+                    {% if user.is_authenticated %}
+						<div class="media">
+							<div class="mr-3" style="background-color: #ffffff">
+                                {% if center.logo %}
+								<a href="#" style="background-color: #ffffff"><img src="{{center.logo.url}}" width="80" height="50" class="rounded-circle" alt=""></a>
+                                {% else %}
+                                    <a href="#"><img src="{% static "vendor/Limitless_2_3/global_assets/images/placeholders/placeholder.jpg"%}" width="38" height="38" class="rounded-circle" alt=""></a>
+                                {% endif %}
+							</div>
+
+							<div class="media-body">
+								<div class="media-title font-weight-semibold">{{ center.shortname }}</div>
+								<div class="font-size-xs opacity-50">
+									<i class="icon-pin font-size-sm"></i> {{ center.city }}
+								</div>
+							</div>
+                            {% if user.superadmin %}
+							<div class="ml-3 align-self-center">
+								<a href="{% url 'institut:centers:edit' center.pk %}" class="text-white"><i class="icon-cog3"></i></a>
+							</div>
+                            {% endif %}
+						</div>
+                    {% endif %}
+					</div>
+				</div>
+				<!-- /user menu -->
+
+
+				<!-- Main navigation -->
+				<div class="card card-sidebar-mobile">
+					<ul class="nav nav-sidebar" data-nav-type="accordion">
+
+						<!-- Main -->
+						<li class="nav-item-header"><div class="text-uppercase font-size-xs line-height-xs">Main</div> <i class="icon-menu" title="Main"></i></li>
+						{% if user.superadmin %}
+                        <li class="nav-item">
+
+							<a href="index.html" class="nav-link active">
+								<i class="icon-home4"></i>
+								<span>
+									{% trans "Dashboard" %}
+									<span class="d-block font-weight-normal opacity-50">No active orders</span>
+								</span>
+							</a>
+						</li>
+
+
+                        <!-- superadmin menu -->
+						<li class="nav-item-header"><div class="text-uppercase font-size-xs line-height-xs">{% trans "Super Admin Menu"%}</div> <i class="icon-menu" title="Layout options"></i></li>
+						<li class="nav-item nav-item-submenu">
+							<a href="#" class="nav-link"><i class="icon-stack2"></i> <span>{% trans "Settings"%}</span></a>
+
+							<ul class="nav nav-group-sub" data-submenu-title="Page layouts">
+								<li class="nav-item"><a href="{% url 'institut:schoolgroups:list'%}" class="nav-link">{% trans "School Group"%}</a></li>
+                                <li class="nav-item"><a href="{% url 'institut:holidays_list'%}" class="nav-link">{% trans "Holidays"%}</a></li>
+                                <li class="nav-item"><a href="{% url 'institut:centers:list'%}" class="nav-link">{% trans "Schools"%}</a></li>
+                                <li class="nav-item"><a href="{% url 'institut:centers:centerlvl_list'%}" class="nav-link">{% trans "School Levels"%}</a></li>
+                                <li class="nav-item"><a href="{% url 'institut:gradelist'%}" class="nav-link">{% trans "Level Grades"%}</a></li>
+                                <li class="nav-item"><a href="{% url 'institut:classlist'%}" class="nav-link">{% trans "Classes"%}</a></li>
+                                <li class="nav-item"><a href="{% url 'institut:academicyear_edit' acayear.pk %}" class="nav-link">{% trans "Academic Year"%}</a></li>
+
+								<li class="nav-item-divider"></li>
+								<li class="nav-item"><a href="layout_boxed_default.html" class="nav-link"></a></li>
+
+							</ul>
+						</li>
+
+						<!-- /Superadmin menu-->
+                        {% endif %}
+
+                        <!-- Regadmin menu -->
+                        {% if user.regadmin %}
+                        <li class="nav-item">
+
+							<a href="index.html" class="nav-link active">
+								<i class="icon-home4"></i>
+								<span>
+									{% trans "Dashboard" %}
+									<span class="d-block font-weight-normal opacity-50">No active orders</span>
+								</span>
+							</a>
+						</li>
+						<li class="nav-item-header"><div class="text-uppercase font-size-xs line-height-xs">{% trans "Admin Menu"%}</div> <i class="icon-menu" title="Layout options"></i></li>
+						<li class="nav-item nav-item-submenu">
+							<a href="#" class="nav-link"><i class="icon-stack2"></i> <span>{% trans "Settings"%}</span></a>
+
+							<ul class="nav nav-group-sub" data-submenu-title="Page layouts">
+								<li class="nav-item"><a href="{% url 'institut:holidays_list'%}" class="nav-link">{% trans "Holidays"%}</a></li>
+                                <li class="nav-item"><a href="{% url 'institut:classlist'%}" class="nav-link">{% trans "Classes"%}</a></li>
+								<li class="nav-item-divider"></li>
+								<li class="nav-item"><a href="layout_boxed_default.html" class="nav-link"></a></li>
+
+							</ul>
+						</li>
+
+						<!-- /Admin menu-->
+                        {% endif %}
+                        {% if user.professor %}
+                        <li class="nav-item">
+
+							<a href="{% url 'institut:profdash'%}" class="nav-link active">
+								<i class="icon-home4"></i>
+								<span>
+									{% trans "Dashboard" %}
+									<span class="d-block font-weight-normal opacity-50">{{user.professor}}</span>
+								</span>
+							</a>
+						</li>
+						<li class="nav-item-header"><div class="text-uppercase font-size-xs line-height-xs">{% trans "Professor Menu"%}</div> <i class="icon-menu" title="Layout options"></i></li>
+						<li class="nav-item nav-item-submenu">
+							<a href="#" class="nav-link"><i class="icon-stack2"></i> <span>{% trans "Settings"%}</span></a>
+
+							<ul class="nav nav-group-sub" data-submenu-title="Page layouts">
+								<li class="nav-item"><a href="{% url 'institut:holidays' %}" class="nav-link"><i class="icon-width"></i> <span>Holidays</span></a></li>
+                                <li class="nav-item"><a href="{% url 'institut:classproflist'%}" class="nav-link">{% trans "Classes"%}</a></li>
+								<li class="nav-item-divider"></li>
+								<li class="nav-item"><a href="layout_boxed_default.html" class="nav-link"></a></li>
+
+							</ul>
+						</li>
+
+						<!-- /Admin menu-->
+                        {% endif %}
+
+
+						<li class="nav-item"><a href="../../../RTL/default/full/index.html" class="nav-link"><i class="icon-width"></i> <span>RTL version</span></a></li>
+
+{#                        <li class="nav-item"><a href="{% url 'institut:calenderedit' %}" class="nav-link"><i class="icon-width"></i> <span>Edit Calender</span></a></li>#}
+						<!-- /main -->
+
+						<!-- Layout -->
+						<li class="nav-item-header"><div class="text-uppercase font-size-xs line-height-xs">Layout</div> <i class="icon-menu" title="Layout options"></i></li>
+						<li class="nav-item nav-item-submenu">
+							<a href="#" class="nav-link"><i class="icon-stack2"></i> <span>Page layouts</span></a>
+
+							<ul class="nav nav-group-sub" data-submenu-title="Page layouts">
+								<li class="nav-item"><a href="layout_fixed_navbar.html" class="nav-link">Fixed navbar</a></li>
+								<li class="nav-item"><a href="layout_fixed_sidebar_custom.html" class="nav-link">Fixed sidebar - custom scroll</a></li>
+								<li class="nav-item"><a href="layout_fixed_sidebar_native.html" class="nav-link">Fixed sidebar - native scroll</a></li>
+								<li class="nav-item"><a href="layout_fixed_footer.html" class="nav-link">Fixed footer</a></li>
+								<li class="nav-item"><a href="layout_hideable_navbar.html" class="nav-link">Hideable navbar</a></li>
+								<li class="nav-item"><a href="layout_without_header.html" class="nav-link">Without page header</a></li>
+								<li class="nav-item-divider"></li>
+								<li class="nav-item"><a href="layout_boxed_default.html" class="nav-link">Boxed with default sidebar</a></li>
+								<li class="nav-item"><a href="layout_boxed_mini.html" class="nav-link">Boxed with mini sidebar</a></li>
+								<li class="nav-item"><a href="layout_boxed_full.html" class="nav-link">Boxed full width</a></li>
+								<li class="nav-item"><a href="layout_boxed_content.html" class="nav-link">Boxed content</a></li>
+							</ul>
+						</li>
+
+						<!-- /layout -->
+
+					</ul>
+				</div>
+				<!-- /main navigation -->
+
+			</div>
+			<!-- /sidebar content -->
+
+		</div>
+		<!-- /main sidebar -->
+{% endif %}
+
+		<!-- Main content -->
+    {% block main %}
+		<div class="content-wrapper">
+
+
+
+			<!-- Content area -->
+			<div class="content pt-0">
+            {% block content %}
+
+
+				<!-- Dashboard content -->
+
+				<!-- /dashboard content -->
+            {% endblock content %}
+			</div>
+			<!-- /content area -->
+
+
+			<!-- Footer -->
+			<div class="navbar navbar-expand-lg navbar-light">
+				<div class="text-center d-lg-none w-100">
+					<button type="button" class="navbar-toggler dropdown-toggle" data-toggle="collapse" data-target="#navbar-footer">
+						<i class="icon-unfold mr-2"></i>
+						Footer
+					</button>
+				</div>
+
+				<div class="navbar-collapse collapse" id="navbar-footer">
+					<span class="navbar-text">
+						&copy; 2020 - 2021. <a href="#">www.Edussy.com</a> a <a href="#" target="_blank">Edussy product</a>
+					</span>
+
+					<ul class="navbar-nav ml-lg-auto">
+						<li class="nav-item"><a href="#" class="navbar-nav-link" target="_blank"><i class="icon-lifebuoy mr-2"></i> Support</a></li>
+						<li class="nav-item"><a href="#" class="navbar-nav-link" target="_blank"><i class="icon-file-text2 mr-2"></i> Docs</a></li>
+						<li class="nav-item"><a href="#" class="navbar-nav-link font-weight-semibold"><span class="text-pink-400"><i class="icon-cart2 mr-2"></i> Register</span></a></li>
+					</ul>
+				</div>
+			</div>
+			<!-- /footer -->
+
+		</div>
+    {% endblock main %}
+		<!-- /main content -->
+
+     <!-- Custom background color -->
+				<div id="logoutModalee" class="modal fade" tabindex="-1">
+					<div class="modal-dialog">
+						<div class="modal-content bg-light">
+							<div class="modal-header">
+								<h5 class="modal-title">{% trans "Logout" %}</h5>
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+							</div>
+
+							<div class="modal-body">
+								<h6 class="font-weight-semibold">{% trans "Ready to Leave?" %}</h6>
+								<p>{% trans "Select 'Logout' below if you are ready to end your current session." %}</p>
+
+
+							</div>
+
+							<div class="modal-footer">
+								<button type="button" class="btn bg-teal-600" data-dismiss="modal">{% trans "Cancel" %}</button>
+                                <a href="{% url 'account_logout' %}"><button type="button" class="btn bg-danger-600">{% trans "Logout" %}</button></a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /custom background color -->
+
+
+<div id="logoutModal" class="modal fade" tabindex="-1">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header bg-teal-400">
+          <h5 class="modal-title" id="exampleModalLabel" style="font-weight: bold">{% trans "Ready to Leave?" %}</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <p>{% trans "Select 'Logout' below if you are ready to end your current session." %}</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn bg-teal" type="button" data-dismiss="modal">{% trans "Cancel" %}</button>
+          <a class="btn btn-danger" href="{% url 'account_logout' %}">{% trans "Logout" %}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+	</div>
+	<!-- /page content -->
+<!-- Core JS files -->
+	<script src={% static "vendor/Limitless_2_3/global_assets/js/main/jquery.min.js" %}></script>
+    <script
+  src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+  integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+  crossorigin="anonymous"></script>
+	<script src={% static "vendor/Limitless_2_3/global_assets/js/main/bootstrap.bundle.min.js" %}></script>
+    <script src={% static "vendor/jquery-ui-1.12.1/jquery-ui.min.js" %}></script>
+	<script src={% static "vendor/Limitless_2_3/global_assets/js/plugins/loaders/blockui.min.js" %}></script>
+	<!-- /core JS files -->
+
+	<!-- Theme JS files -->
+	<script src={% static "vendor/Limitless_2_3/global_assets/js/plugins/visualization/d3/d3.min.js" %}></script>
+	<script src={% static "vendor/Limitless_2_3/global_assets/js/plugins/visualization/d3/d3_tooltip.js" %}></script>
+	<script src={% static "vendor/Limitless_2_3/global_assets/js/plugins/forms/styling/switchery.min.js" %}></script>
+	<script src={% static "vendor/Limitless_2_3/global_assets/js/plugins/ui/moment/moment.min.js" %}></script>
+    <script src={% static "vendor/Limitless_2_3/global_assets/js/plugins/pickers/daterangepicker.js" %}></script>
+	<script src={% static "vendor/datepicker/datepicker.min.js" %}></script>
+    <script src={% static "vendor/Limitless_2_3/global_assets/js/plugins/notifications/pnotify.min.js" %}></script>
+	<script src={% static "vendor/Limitless_2_3/global_assets/js/demo_pages/form_controls_extended.js" %}></script>
+    <script src={% static "vendor/Limitless_2_3/global_assets/js/plugins/forms/styling/uniform.min.js" %}></script>
+{#	<script src={% static "vendor/Limitless_2_3/global_assets/js/plugins/forms/styling/switchery.min.js" %}></script>#}
+{#	<script src={% static "vendor/Limitless_2_3/global_assets/js/plugins/forms/styling/switch.min.js" %}></script>#}
+    <script src={% static "vendor/Limitless_2_3/global_assets/js/demo_pages/form_checkboxes_radios.js" %}></script>
+    <script src={% static "vendor/sweetalert2/dist/sweetalert2.min.js" %}></script>
+    <script src={% static "vendor/Limitless_2_3/global_assets/js/plugins/extensions/jquery_ui/interactions.min.js" %}></script>
+    <script src={% static "vendor/Limitless_2_3/global_assets/js/plugins/notifications/bootbox.min.js" %}></script>
+	<script src={% static "vendor/Limitless_2_3/global_assets/js/plugins/forms/selects/select2.min.js" %}></script>
+	<script src={% static "vendor/Limitless_2_3/assets/js/app.js" %}></script>
+    <script src={% static "vendor/Limitless_2_3/global_assets/js/demo_pages/components_modals.js" %}></script>
+	<script src={% static "vendor/Limitless_2_3/global_assets/js/demo_pages/dashboard.js" %}></script>
+	<script src={% static "vendor/Limitless_2_3/global_assets/js/demo_charts/pages/dashboard/light/streamgraph.js" %}></script>
+	<script src={% static "vendor/Limitless_2_3/global_assets/js/demo_charts/pages/dashboard/light/sparklines.js" %}></script>
+	<script src={% static "vendor/Limitless_2_3/global_assets/js/demo_charts/pages/dashboard/light/lines.js" %}></script>
+	<script src={% static "vendor/Limitless_2_3/global_assets/js/demo_charts/pages/dashboard/light/areas.js" %}></script>
+	<script src={% static "vendor/Limitless_2_3/global_assets/js/demo_charts/pages/dashboard/light/donuts.js" %} ></script>
+	<script src={% static "vendor/Limitless_2_3/global_assets/js/demo_charts/pages/dashboard/light/bars.js" %}></script>
+	<script src={% static "vendor/Limitless_2_3/global_assets/js/demo_charts/pages/dashboard/light/progress.js" %}></script>
+	<script src={% static "vendor/Limitless_2_3/global_assets/js/demo_charts/pages/dashboard/light/heatmaps.js" %}></script>
+	<script src={% static "vendor/Limitless_2_3/global_assets/js/demo_charts/pages/dashboard/light/pies.js" %}></script>
+	<script src={% static "vendor/Limitless_2_3/global_assets/js/demo_charts/pages/dashboard/light/bullets.js" %}></script>
+    <script src={% static "vendor/Limitless_2_3/global_assets/js/plugins/forms/inputs/maxlength.min.js" %}></script>
+    <script src={% static "vendor/Limitless_2_3/global_assets/js/plugins/forms/inputs/autosize.min.js" %}></script>
+    <script type="text/javascript" src="{% static "js/schedule.js" %}"></script>
+    	<!-- /theme JS files -->
+    <script>
+        $(function () {
+
+
+            $('.change-language').click(function (e) {
+                    $('#language').val($(this).attr('data-lang-code'));
+                    $('#change-language-form').submit();
+        });
+        });
+    </script>
+    <script>
+        $('body').on('click', '[data-kid]', function() {
+            var kidid = $(this).data('kid');
+
+            $.ajax({
+                         type: "GET",
+                         url: '/institut/edit_kids',
+                         data: {'kid': kidid},
+                         dataType: "json",
+                         success: function (json) {
+                            setTimeout(
+                                function()
+                                {
+                                   location.reload();
+                                }, 0001);
+                         },
+                         failure: function (json) {
+                             alert('There is a problem!!!');
+                         }
+            });
+
+
+        });
+
+        $('body').on('click', '[data-ayear]', function() {
+            var ayear = $(this).data('ayear');
+
+            $.ajax({
+                         type: "GET",
+                         url: '/institut/edit_year',
+                         data: {'ayear': ayear},
+                         dataType: "json",
+                         success: function (json) {
+                            setTimeout(
+                                function()
+                                {
+                                   location.reload();
+                                }, 0001);
+                         },
+                         failure: function (json) {
+                             alert('There is a problem!!!');
+                         }
+            });
+
+
+        });
+
+ </script>
+ {% block project_js %}
+  <!-- Page level custom scripts -->
+
+{% endblock project_js %}
+</body>
+</html>

@@ -1,0 +1,263 @@
+
+.x3 {
+    font-family: Roboto Slab,georgia;
+    color: #0b0b0b;
+    font-weight: 600;
+    width: 550px;
+    text-transform: capitalize;
+}
+
+
+.x11 {
+    clear: both;
+    margin-top: 4px;
+}
+
+.x3, .x6{
+    margin-left: 2px;
+    margin-top: 3px;
+    text-align: left;
+    overflow: hidden;
+    float: left
+}
+
+
+
+.x6 {
+    text-align: right;
+    float: right;
+    font-size: 7px;
+    margin: 2px 3px 2px 8px;
+}
+
+.aditem .tx {
+    font-family: Verdana, arial;
+    margin-top: 8px;
+}
+
+.adlist-tagsbox-inlineblockline .aditem-price, .adlist-tagsbox-blockline .aditem-price {
+    display: block;
+    color: #cc3232;
+    font-weight: bold;
+    float: left;
+    font-size: 24px;
+    margin: 0 16px 0 0;
+    padding: 0;
+    line-height: 1;
+}
+
+.adlist-tagsbox-inlineblockline .aditem-price sup, .adlist-tagsbox-blockline .aditem-price sup {
+    margin: 0 0 0 1px;
+    line-height: 1;
+    font-size: 13px;
+}
+
+.aditem {
+    border-radius: 8px;
+    overflow: hidden;
+    border: solid 1px #E1E4E7;
+    font-family: Verdana, arial;
+    text-align: left;
+}
+
+.aditem * {
+    box-sizing: border-box;
+}
+
+.aditem > * {
+    overflow: hidden;
+}
+
+.aditem > .aditem-header {
+    padding: 2px 15px;
+    background-color: #f5f4f4;
+    border-bottom: solid 1px #E1E4E7;
+    float: left;
+    width: 100%;
+}
+
+.aditem > .aditem-header .x3, .aditem > .aditem-header .x6 {
+    color: #000;
+    font-weight: 600;
+}
+.aditem > .aditem-header .x3{
+    color: #556955;
+}
+.aditem > .aditem-header .highlighted-title {
+    color: #D34A7A;
+    font-size: 11px;
+    text-decoration: none;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.aditem > .aditem-header .x4, .aditem > .aditem-header .x5 a {
+    color: #80868D;
+}
+
+.aditem > .aditem-detail-image-container {
+    width: 100%;
+    padding: 16px;
+}
+
+.aditem > .aditem-detail-image-container > .aditem-detail, .ad-MaNative .aditem-detail-image-container > .aditem-detail{
+    position: relative;
+    float: left;
+    width: 100%;
+}
+
+.aditem-detail{
+    flex-grow: 1;
+}
+
+.aditem .aditem-image, .ad-MaNative .aditem-image {
+    width: 160px;
+    height: 120px;
+    float: right;
+    flex: none;
+    text-align: right;
+    margin: 0 0 0 16px;
+    border-radius: 4px;
+    position: relative;
+
+}
+
+.aditem .aditem-image .aditem-photo-bg {
+
+}
+
+.aditem .aditem-image a, .ad-MaNative  .aditem-image a {
+    background-color: #f6f7f8;
+    display: flex;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    overflow: hidden;
+
+}
+
+.aditem .aditem-image img, .ad-MaNative .aditem-image img {
+    max-height: 120px;
+    max-width: 160px;
+}
+
+
+.aditem .aditem-detail-container {
+    width: 100%;
+    padding: 16px;
+}
+.aditem .flex-content{
+    display: flex;
+}
+
+.aditem .aditem-detail-container .aditem-detail {
+    position: relative;
+
+}
+
+.aditem .aditem-footer {
+    padding: 4px 8px;
+    background-color: #f5f4f4;
+    border-top: solid 1px #E1E4E7;
+    width: 100%;
+    height: 40px;
+}
+
+.aditem .eso-container {
+    margin-top: 16px;
+    z-index: 100;
+}
+
+.aditem .aditem-detail-title, .ad-MaNative .aditem-detail-title{
+    font-weight: 700;
+    font-size: 20px;
+    height: 21px;
+    line-height: 18px;
+    font-size: 14px;
+    font-family: Roboto Slab,georgia;
+    color: #0b0b0b;
+    font-weight: bold;
+
+}
+
+.aditem-buttons {
+    width: inherit;
+}
+.aditem-buttons {
+    display: flex;
+    flex-basis: 100%;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+.aditem-buttons > div {
+    margin-right: 4px;
+}
+.aditem-buttons .def-btn {
+    height: 32px;
+    font-size:14px;
+    border-radius: 4px;
+    padding: 4px 8px;
+    min-width: 120px;
+}
+
+.aditem-buttons .def-btn :last-child {
+    margin: 0 8px 0 0;
+    vertical-align: middle;
+    padding-left: 0;
+}
+
+.list-location-link {
+    margin: 1px 0px;
+    display: flex;
+    font-size: 10px;
+}
+
+.list-location-link > a {
+    display: flex;
+}
+
+
+.list-location-link > a > svg {
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+}
+
+.list-location-region {
+    margin: 1px 0px;
+    text-transform: capitalize;
+    display: flex;
+    font-size: 12px;
+}
+
+.list-location-region > svg {
+    margin-right: 8px;
+}
+.icon16 {
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+}
+.tx {
+    color: #3c3c3c;
+    clear: both;
+}
+.tx {
+    font-size: 12px
+}
+
+.inmo-attributes {
+    display: inline-block;
+    float: left;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+.inmo-attributes > div {
+    margin-top: 8px;
+}

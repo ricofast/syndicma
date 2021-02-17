@@ -1,0 +1,221 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+
+{% block content_title %}
+    <h2 class="h3">{% trans "Сourse" %}</h2>
+{% endblock content_title %}
+
+
+
+{% block content %}
+    <!-- Page header -->
+    <div class="content pt-0">
+			<div class="page-header">
+				<div class="page-header-content header-elements-md-inline">
+					<div class="page-title d-flex">
+						<h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">{% trans "Home" %}</span> - {% trans "Course Edit" %}</h4>
+						<a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
+					</div>
+
+					{% comment %}<div class="header-elements d-none text-center text-md-left mb-3 mb-md-0">
+						<div class="btn-group">
+							<button type="button" class="btn bg-indigo-400"><i class="icon-stack2 mr-2"></i> New report</button>
+							<button type="button" class="btn bg-indigo-400 dropdown-toggle" data-toggle="dropdown"></button>
+							<div class="dropdown-menu dropdown-menu-right">
+								<div class="dropdown-header">Actions</div>
+								<a href="#" class="dropdown-item"><i class="icon-file-eye"></i> View reports</a>
+								<a href="#" class="dropdown-item"><i class="icon-file-plus"></i> Edit reports</a>
+								<a href="#" class="dropdown-item"><i class="icon-file-stats"></i> Statistics</a>
+								<div class="dropdown-header">Export</div>
+								<a href="#" class="dropdown-item"><i class="icon-file-pdf"></i> Export to PDF</a>
+								<a href="#" class="dropdown-item"><i class="icon-file-excel"></i> Export to CSV</a>
+							</div>
+						</div>
+					</div>{% endcomment %}
+				</div>
+			</div>
+			<!-- /page header -->
+
+    <div class="d-md-flex align-items-md-start justify-content-center">
+
+
+        <div class="tab-content w-md-75">
+            {% if user.professor %}
+
+            {% endif %}
+
+
+            <form action="" class="bg-white p-5 contact-form" method="post">
+                <div class="card">
+                    <div class="card-header header-elements-inline">
+								<h6 class="card-title">{% trans "Edit Your Course [" %} {{ course.title }} ]</h6>
+								<div class="header-elements">
+									<div class="list-icons">
+				                		<a class="list-icons-item" data-action="collapse"></a>
+				                		<a class="list-icons-item" data-action="reload"></a>
+{#				                		<a class="list-icons-item" data-action="remove"></a>#}
+				                	</div>
+			                	</div>
+                    </div>
+
+                                    {% csrf_token %}
+                    <div class="card-body">
+                                <ul class="nav nav-tabs nav-tabs-solid nav-justified rounded bg-light mb-0">
+									<li class="nav-item"><a href="#bordered-tab1" class="nav-link active" data-toggle="tab">{% trans "Course" %}</a></li>
+									<li class="nav-item"><a href="#bordered-tab2" class="nav-link" data-toggle="tab">{% trans "More Info" %}</a></li>
+                                    <li class="nav-item"><a href="#bordered-tab3" class="nav-link" data-toggle="tab">{% trans "Files Upload" %}</a></li>
+                                    <li class="nav-item"><a href="#bordered-tab4" class="nav-link" data-toggle="tab">{% trans "School Supply" %}</a></li>
+									{% comment %}<li class="nav-item dropdown">
+										<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Dropdown</a>
+										<div class="dropdown-menu dropdown-menu-right">
+											<a href="#bordered-tab3" class="dropdown-item" data-toggle="tab">Dropdown tab</a>
+											<a href="#bordered-tab4" class="dropdown-item" data-toggle="tab">Another tab</a>
+										</div>
+									</li>{% endcomment %}
+								</ul>
+
+                        <div class="tab-content card card-body border-top-0 rounded-top-0 mb-0">
+                            <div class="tab-pane fade show active" id="bordered-tab1">
+
+                                {{ form.title|as_crispy_field }}
+
+                                <div class="form-group" >
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        {{ form.classe|as_crispy_field }}
+                                    </div>
+                                    <div class="col-md-3">
+                                         {{ form.credit|as_crispy_field }}
+                                    </div>
+                                    <div class="col-md-3">
+                                        {{ form.number_sessions|as_crispy_field }}
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+                                <div class="form-group">
+                                <div class="row justify-content-center">
+
+                                    <div class="col-md-4">
+                                        {{ form.area|as_crispy_field }}
+                                    </div>
+                                    <div class="col-md-4">
+                                        {{ form.language|as_crispy_field }}
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+
+
+
+
+                            </div>
+
+
+                            <div class="tab-pane fade" id="bordered-tab2">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                             {{ form.descrip|as_crispy_field }}
+                                        </div>
+                                        <div class="col-md-6">
+                                            {{ form.extrainfo|as_crispy_field }}
+                                        </div>
+
+
+                                    </div>
+                                 </div>
+
+
+
+                             <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        {{ form.textbook|as_crispy_field }}
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+
+
+
+
+                            </div>
+                            <div class="tab-pane fade" id="bordered-tab3">
+                                {{ form.picture|as_crispy_field }}
+
+                                <div class="form-group">
+                                <div class="row" style="background-color: #fafafa;">
+                                    <div class="col-md-6" >
+                                         {{ form.syllabus|as_crispy_field }}
+                                    </div>
+
+
+
+                                </div>
+
+                            </div>
+                            </div>
+                            <div class="tab-pane fade" id="bordered-tab4">
+                                {{ formset.management_form }}
+								{% for supply_form in formset %}
+                                    <div class="row formset-row">
+                                        {% for field in supply_form.visible_fields %}
+                                            <div class="col">{{ field|as_crispy_field }}</div>
+                                        {% endfor %}
+                                    </div>
+                                    {% for field in supply_form.hidden_fields %}
+                                        {{ field|as_crispy_field }}
+                                    {% endfor %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                </div>
+
+                    <div class="card-footer">
+                        <div class="d-flex justify-content-center align-items-center">
+                            <div class = "" style="display: none">
+                                        {{ form.active|as_crispy_field }}
+                            </div>
+
+                                <input type="submit" value='{% trans "Save Course" %}' class="btn btn-primary py-3 px-5 mt-3">
+
+
+
+                        </div>
+                    </div>
+            </div>
+            </form>
+        </div>
+
+
+</div>
+    </div>
+{% endblock content %}
+
+{% block project_js %}
+
+    <script src={% static "vendor/jquery.formset.js" %}></script>
+    <script src={% static "js/course_edit.js" %}></script>
+    <script>
+        $("#id_area").html($("#id_area option").sort(function (a, b) {
+            return a.text == b.text ? 0 : a.text < b.text ? -1 : 1
+        }))
+    </script>
+    <script>
+        $("#id_center").html($("#id_center option").sort(function (a, b) {
+            return a.text == b.text ? 0 : a.text < b.text ? -1 : 1
+        }))
+    </script>
+    <script src={% static "js/course_search.js" %}></script>
+{% endblock project_js %}
+

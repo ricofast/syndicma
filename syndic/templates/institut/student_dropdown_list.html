@@ -1,0 +1,6 @@
+{% load i18n %}
+<option value="all">{% trans "All Students" %}</option>
+{% for student in students %}
+    <option value="{{student.id}}">{{student}}</option>
+
+{% endfor %}

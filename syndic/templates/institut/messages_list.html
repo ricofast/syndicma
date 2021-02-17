@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block content_title %}
+    <h2 class="h3">{% trans "Messages" %}</h2>
+
+
+{% endblock content_title %}
+
+
+{% block css %}
+    {{ block.super }}
+
+{% endblock css %}
+
+{% block content %}
+    <div class="page-header">
+				<div class="page-header-content header-elements-md-inline">
+					<div class="page-title d-flex">
+						<h4><i class="icon-arrow-left52 mr-2"></i> <span class="font-weight-semibold">{% trans "Home" %}</span> - {% trans "Messages List" %}</h4>
+						<a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
+					</div>
+
+				</div>
+    </div>
+
+    <div class="d-md-flex align-items-md-start justify-content-center">
+        <div class="tab-content w-md-75">
+
+
+
+
+                <div class="card">
+                    <div class="card-header header-elements-inline">
+
+
+                            <h6 class="card-title">{% trans "List of Messages" %}</h6>
+                            <a class=" btn btn-primary mb-4 btn"
+                                        href="{% url 'institut:message' %}">{% trans "Send a Message" %}</a>
+
+
+
+								<div class="header-elements">
+									<div class="list-icons">
+				                		<a class="list-icons-item" data-action="collapse"></a>
+				                		<a class="list-icons-item" data-action="reload"></a>
+{#				                		<a class="list-icons-item" data-action="remove"></a>#}
+				                	</div>
+			                	</div>
+
+                        </div>
+
+
+                    <div class="card-body"> </div>
+                    <table class="table datatable-responsive-row-control">
+						<thead>
+							<tr>
+                                <th></th>
+								<th>{% trans "Sender" %}</th>
+								<th>{% trans "Date Sent" %}</th>
+								<th>{% trans "Destination" %}</th>
+                                <th>{% trans "Subject" %}</th>
+                                <th>{% trans "Message" %}</th>
+                                <th class="text-center">{% trans "Delete" %}</th>
+{#								<th>{% trans "End Date" %}</th>#}
+							</tr>
+						</thead>
+                        <tbody>
+                            {% for message in object_list %}
+							<tr role="row">
+                                <td></td>
+                                <td class="sorting_1">{{ message.admin }}</td>
+								<td>{{ message.notifydate|date:"SHORT_DATE_FORMAT" }}</td>
+								<td>{{ message.receiver }}</td>
+                                <td>{{ message.subject }}</td>
+
+                                <td>{{ message.text }}</td>
+                                <td class="text-center">
+                                    <a href="#" class="mr-3">
+                                        <div class="ml-3 align-self-center" data-message="{{ message.id }}" id="{{ message.id }}">
+                                            <span class="icon-trash"></span>
+                                        </div>
+                                    </a>
+                                </td>
+							</tr>
+                           {% endfor %}
+
+						</tbody>
+					</table>
+
+
+
+
+
+
+                    <div class="card-footer">
+
+
+                    </div>
+                </div>
+
+
+
+        </div>
+    </div>
+
+
+{% endblock content %}
+{% block project_js %}
+  {{ block.super }}
+<script src={% static "vendor/Limitless_2_3/global_assets/js/plugins/tables/datatables/datatables.min.js" %}></script>
+<script src={% static "vendor/Limitless_2_3/global_assets/js/plugins/tables/datatables/extensions/responsive.min.js" %}></script>
+    <script src={% static "vendor/Limitless_2_3/assets/js/datatables_responsive.js" %}></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+     var el = document.getElementsByName("csrfmiddlewaretoken");
+         csrf_value = el[0].getAttribute("value");
+
+ });
+$('body').on('click', '[data-message]', function() {
+            var messageid = $(this).data('message');
+            $.ajax({
+                type: "GET",
+                url: '/institut/deletemessage',
+                data: {'messageid': messageid},
+                dataType: "json",
+                success: function (json) {
+                    setTimeout(
+                        function()
+                        {
+                            location.reload();
+                        }, 0001);
+                },
+                failure: function (json) {
+                    alert('There is a problem!!!');
+                }
+            });
+
+});
+</script>
+{% endblock project_js %}

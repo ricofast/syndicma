@@ -1,0 +1,96 @@
+{% load i18n %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load auth_extras %}
+<div class="col-md-12">
+  <div class="team d-md-fle p-4 bg-white">
+    <div class="px-md-4">
+
+      <h2>{{ course.title }}</h2>
+    <p> {% if course.studylevel %}
+            {{ course.studylevel }}
+        {% endif %}
+
+    </p>
+        <span class="location mb-0">
+              {% trans "Course City: " %}{{ course.city }}
+            </span>
+    <br>
+      {% for area in  course.area.all %}
+        <span class="position">{{ area }} </span>
+        {% if course.center %}<p>{% trans "Center" %}:
+          {{ course.center.name }}
+        </p>
+        {% endif %}
+      {% endfor %}
+    <hr>
+        <h5>{% trans "Course Description" %}</h5>
+      <p class="mb-2">{{ course.descrip }}</p>
+    <hr>
+        <h5>{% trans "Extra Information" %}</h5>
+        <p class="mb-2">{{ course.extrainfo }}</p>
+      <table class="table table-bordered mt-4">
+        <tbody>
+        <tr>
+          <th scope="row">{% trans "Locations" %}</th>
+          <td>
+            {% for location in course.locations.all %}
+              {{ location }}<br>
+            {% endfor %}
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">{% trans "Age" %}</th>
+          <td>
+            {% for age in  course.age.all %}
+              {{ age }}<br>
+            {% endfor %}
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">{% trans "Course level" %}</th>
+          <td>
+            {{ course.level }}
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">{% trans "Duration" %}</th>
+          <td>{{ course.duration }}</td>
+        </tr>
+        <tr>
+          <th scope="row">{% trans "The class is taught in" %}</th>
+          <td>
+            {% for language in  course.language.all %}
+              {{ language }} <br>
+            {% endfor %}
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      {% if user.student %}
+        <form action="{% url 'institut:enrollments:create' %}" method="post" class="d-none" id="enrollment-form">
+          {% csrf_token %}
+          {{ enrollment_form }}
+        </form>
+        {% if enrollment_accepted is None %}
+          <div class="alert alert-primary" role="alert">
+            {% trans "Your enrollment is under review."%}
+          </div>
+        {% elif enrollment_accepted is True %}
+          <div class="alert alert-success" role="alert">
+            {% trans "Your enrollment was accepted."%}
+          </div>
+        {% elif enrollment_accepted is False %}
+          <div class="alert alert-warning" role="alert">
+            {% trans "Your enrollment was rejected."%}
+          </div>
+        {% elif enrollment_accepted == "not_existing" %}
+          <button id="enroll" type="button" class="btn btn-primary">{% trans "Enroll" %}</button>
+          <div id="enrollment-sent-alert" class="alert alert-primary d-none" role="alert">
+            {% trans "Your enrollment request was sent."%}
+          </div>
+        {% endif %}
+      {% endif %}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,311 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block css %}
+  {{ block.super }}
+  <link rel="stylesheet" href={% static "css/search.css" %} type="text/css"/>
+    <style>
+    .socialicons
+    {
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+        position: fixed;
+        z-index: 100;
+    }
+    .socialicons .button
+    {
+        height: 40px;
+        width: 40px;
+        overflow: hidden;
+       cursor: pointer;
+       box-shadow: 0px 10px 10px rgba(0,0,0,0.1);
+       transition: all 0.3s ease-out;
+    }
+    .socialicons ul
+    {
+        padding: initial;
+    }
+    .socialicons ul li
+    {
+
+        list-style-type: none;
+        padding-left: 12px;
+        padding-top: 6px;
+        margin-top: 5px;
+        color: #fff;
+        background: #ffffff;
+    }
+   .socialicons .button .twiter
+    {
+        background: #1DA1F2;
+    }
+    .socialicons .button .facebook
+    {
+         background: #4267B2;
+    }
+    .socialicons .button .instagram
+    {
+        background: #E1306C;
+    }
+    .socialicons .button .youtube
+    {
+        background: #ff0000;
+    }
+    .socialicons .button  span
+    {
+        margin-left: 10px;
+    }
+    .socialicons .button:hover
+    {
+        padding-left: 10px;
+        width: 120px;
+        transition: all 0.3s ease-out;
+    }
+    </style>
+{% endblock css %}
+
+{% block header_content %}
+
+{% endblock header_content %}
+
+{% block main %}
+    <div id="wrapper">
+    <div id="content-wrapper" class="d-flex flex-column">
+
+    <div class="row d-md-flex no-gutters slider-text align-items-center justify-content-center">
+    {% comment %}<div class="row">
+        <div class="col-md-7">
+            <button type="button" class="form-control btn btn-primary">{% trans "New" %}</button>
+            <a class="btn-primary" href="{% url 'profiles:freecourses' %}">{% trans "Free Courses" %}</a>
+        </div>
+    </div>{% endcomment %}
+      <div class="col-md-7 d-flex align-items-center ftco-animate">
+        <div class="text text-center pt-5 mt-md-5">
+
+          <h1 class="mb-5 d-none d-lg-block">{% trans "What do you want to learn?" %}</h1>
+
+            {% comment %}<a class="navbar-brand d-lg-none" href="{% url 'courses:search' %}">
+      <img src="{% static 'images/logosm.png' %}" alt="Super-Prof">
+
+    </a>{% endcomment %}
+          <h4 class="mb-5 d-lg-none" style="color: white">{% trans "What do you want to learn?" %}</h4>
+
+          <div class="ftco-search my-md-5">
+            <div class="row">
+              <div class="col-md-12 nav-link-wrap">
+                <div class="nav nav-pills text-center" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                  <a class="nav-link active mr-md-1" id="v-pills-1-tab" data-toggle="pill" href="#v-pills-1"
+                     role="tab" aria-controls="v-pills-1" aria-selected="true">{% trans "Find a Professor" %}</a>
+                  <a class="nav-link" id="v-pills-2-tab" data-toggle="pill" href="#v-pills-2"
+                    role="tab" aria-controls="v-pills-2" aria-selected="false">{% trans "Find a Center" %}</a>
+                </div>
+              </div>
+              <div class="col-md-12 tab-wrap">
+                <div class="tab-content p-4" id="v-pills-tabContent">
+                  <div class="tab-pane fade show active" id="v-pills-1" role="tabpanel" aria-labelledby="v-pills-nextgen-tab">
+                    <form action="{% url 'courses:search_results' %}" class="search-job">
+                      <div class="row no-gutters">
+                        <div class="col-md mr-md-2">
+                                {{ form.city|as_crispy_field }}
+                        </div>
+                        <div class="col-md mr-md-2">
+                                {{ form.area|as_crispy_field }}
+                        </div>
+                        <div class="col-md-3">
+                          <div class="form-group">
+                            <div class="form-field">
+                              <button type="submit" class="form-control btn btn-primary">{% trans "Search" %}</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="tab-pane fade" id="v-pills-2" role="tabpanel"
+                    aria-labelledby="v-pills-performance-tab">
+                    <form action="{% url 'courses:centers:search_results' %}" id="center_search" class="search-job" method="get">
+                      <div class="row no-gutters">
+                        <div class="col-md mr-md-2">
+                          {{ form.name|as_crispy_field }}
+                        </div>
+                        <div class="col-md-3">
+                          <div class="form-group">
+                            <div class="form-field">
+                              <button type="submit" class="form-control btn btn-primary">{% trans "Search" %}</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              <p class="mb-4">{% trans "From math tutoring to yoga, Superprof is the best and fastest way to find high-quality teachers." %}</p>
+              </div>
+            </div>
+          </div>
+            <div class="ftco-counter ftco-no-pt ftco-no-pb d-none d-lg-block">
+            <div class="row">
+              <div class="col-md-4 d-flex justify-content-center counter-wrap ftco-animate">
+                <div class="block-18">
+                  <div class="text d-flex">
+                    <div class="icon mr-2">
+                      <span class="flaticon-worldwide"></span>
+                    </div>
+                    <div class="desc text-left">
+                      <strong class="number" data-number="46">46</strong>
+                      <span>{% trans "Cities" %}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 d-flex justify-content-center counter-wrap ftco-animate">
+                <div class="block-18 text-center">
+                  <div class="text d-flex">
+                    <div class="icon mr-2">
+                      <span class="flaticon-visitor"></span>
+                    </div>
+                    <div class="desc text-left">
+                      <strong class="number" data-number="450">0</strong>
+                      <span>{% trans "Professors" %}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 d-flex justify-content-center counter-wrap ftco-animate">
+                <div class="block-18 text-center">
+                  <div class="text d-flex">
+                    <div class="icon mr-2">
+                      <span class="flaticon-resume"></span>
+                    </div>
+                    <div class="desc text-left">
+                      <strong class="number" data-number="80000">0</strong>
+                      <span>{% trans "Students" %}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+        <div class="col-md-1 d-flex align-items-center ftco-animate d-none d-lg-block">
+             <br>
+        </div>
+        <div class="col-md-3 d-flex align-items-center ftco-animate" style="border: 3px solid white;">
+
+
+                <div class="top-category text-center active">
+                     <h3>{% trans "How to use this Website" %}</h3>
+                        <p><span>{% trans "if you are a professor or a student there are plenty of videos to show you how to register in this website and how to use all the services offered" %}</span></p>
+                    <a href="{% url 'courses:howto' %}" class="btn btn-danger ">{% trans "Access Help Page" %}</a>
+                 </div>
+
+        </div>
+    </div>
+<div class="row">
+
+    			<div class="col-md-12">
+    				<div class="category-wrap">
+                        <div class=" text-center no-border-left">
+                            <h2 style="font-family: Roboto Slab,serif;font-weight: 400;margin-bottom: 25px;color: #505050; font-size: 24px;">{% trans "Newly Added Courses" %}</h2>
+                            <hr>
+                        </div>
+    					<div class="row no-gutters">
+                            {% for course in object_list %}
+    						<div class="col-md-2">
+                            <a href="{% url 'courses:detail' course.pk %}" target="_blank" class="aditem-detail-title">
+    							<div class="top-category text-center no-border-left">
+
+    								{% if course.professor.picture %}
+                                            <div class="div-img undef" style="width:100px;height:100px;
+                                                    background-image:url({{ course.professor.picture.url }});background-size:100px 100px;background-position:center center;
+                                                    display:inline-block" alt=""><meta itemprop="image" content="{{ course.professor.picture.url }}"></div>
+                                        {% else %}
+                                            <div class="div-img undefined" style="width:100px;height:100px;
+                                                    background-image:url({% static "images/teacher.png" %});background-size:100px 100px;background-position:center center;
+                                                    display:inline-block" alt=""><meta itemprop="image" content="{% static "images/teacher.png" %}"></div>
+                                        {% endif %}
+                                <p style="font-size: 14px;font-family: Roboto Slab;color: #505050;font-weight: 400;">{{ course.professor }}</p>
+    								<p style="font-family: Roboto Slab,serif;font-size: 11px;color: #555;"><span>{{ course.title|truncatechars:50 }}</span></p>
+    							</div>
+                            </a>
+    						</div>
+                            {% endfor %}
+    						{% comment %}<div class="col-md-2">
+    							<div class="top-category text-center active">
+    								<h3><a href="#">Education &amp; Training</a></h3>
+    								<span class="icon flaticon-mortarboard"></span>
+    								<p><span class="number">143</span> <span>Open position</span></p>
+    							</div>
+    						</div>
+    						<div class="col-md-2">
+    							<div class="top-category text-center">
+    								<h3><a href="#">Graphic &amp; UI/UX Design</a></h3>
+    								<span class="icon flaticon-idea"></span>
+    								<p><span class="number">143</span> <span>Open position</span></p>
+    							</div>
+    						</div>
+    						<div class="col-md-2">
+    							<div class="top-category text-center">
+    								<h3><a href="#">Accounting &amp; Finance</a></h3>
+    								<span class="icon flaticon-accounting"></span>
+    								<p><span class="number">143</span> <span>Open position</span></p>
+    							</div>
+    						</div>
+    						<div class="col-md-2">
+    							<div class="top-category text-center">
+    								<h3><a href="#">Restaurant &amp; Food</a></h3>
+    								<span class="icon flaticon-dish"></span>
+    								<p><span class="number">143</span> <span>Open position</span></p>
+    							</div>
+    						</div>
+    						<div class="col-md-2">
+    							<div class="top-category text-center">
+    								<h3><a href="#">Health &amp; Hospital</a></h3>
+    								<span class="icon flaticon-stethoscope"></span>
+    								<p><span class="number">143</span> <span>Open position</span></p>
+    							</div>
+    						</div>
+    					</div>{% endcomment %}
+    				</div>
+    			</div>
+
+  </div>
+    {% comment %}<div class="socialicons">
+            <ul class="">
+                   <a href="https://twitter.com/MaSuperprof" target="_blank">
+                       <div class="button">
+                           <li class="twiter ftco-animate" ><i class="fab fa-twitter"></i><span class="itwitter">Twitter</span></li>
+                       </div>
+                   </a>
+                    <a href="https://www.instagram.com/superprofma/" target="_blank" >
+                        <div class="button">
+                            <li class="instagram ftco-animate" ><i class="fab fa-instagram"></i><span class="iinstagram" >Instagram</span></li>
+                        </div>
+                    </a>
+                   <a href="https://www.facebook.com/Superprofma-111557964003302" target="_blank" >
+                       <div class="button">
+                           <li class="facebook ftco-animate" ><i class="fab fa-facebook-f"></i><span class="ifacebook">Facebook</span></li>
+                       </div>
+                   </a>
+                    <a href="https://www.youtube.com/channel/UCgtKcve8SVqjg6V-x1R8xwA" target="_blank" >
+                        <div class="button">
+                            <li class="youtube ftco-animate" ><i class="fab fa-youtube"></i><span class="iyoutube" >Youtube</span></li>
+                        </div>
+                    </a>
+                </ul>
+            </div>{% endcomment %}
+    </div>
+{% endblock main %}
+
+{% block footer %}
+{% endblock footer %}
+
+{% block project_js %}
+  {{ block.super }}
+
+  <script src={% static "jss/course_search.js" %}></script>
+{% endblock project_js %}

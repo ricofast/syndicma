@@ -1,0 +1,1115 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-08-26 13:51+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
+#: basec.py:114
+msgid "French"
+msgstr ""
+
+#: basec.py:115 config/settings/base.py:123
+msgid "العربية"
+msgstr ""
+
+#: basec.py:116 config/settings/base.py:124
+msgid "English"
+msgstr "الإنجليزية"
+
+#: config/settings/base.py:122
+msgid "Français"
+msgstr ""
+
+#: opencourse/courses/apps.py:7 opencourse/courses/models.py:166
+#: opencourse/templates/courses/course_detail.html:182
+#: opencourse/templates/courses/course_list.html:6
+msgid "Courses"
+msgstr "الدروس"
+
+#: opencourse/courses/filters.py:25 opencourse/courses/forms.py:35
+#: opencourse/courses/models.py:101
+msgid "Area"
+msgstr "المجال"
+
+#: opencourse/courses/filters.py:26 opencourse/courses/forms.py:42
+#: opencourse/courses/forms.py:65 opencourse/courses/models.py:42
+#: opencourse/profiles/forms.py:76 opencourse/profiles/forms.py:100
+#: opencourse/templates/courses/course_detail.html:70
+#: opencourse/templates/courses/course_students_list.html:62
+#: opencourse/templates/courses/professor_detail.html:69
+#: opencourse/templates/profiles/student_detail.html:62
+#: opencourse/templates/profiles/student_detail.html:150
+msgid "City"
+msgstr "المدينة"
+
+#: opencourse/courses/filters.py:27 opencourse/courses/forms.py:11
+#: opencourse/courses/forms.py:43 opencourse/courses/models.py:133
+#: opencourse/templates/components/course_body.html:21
+#: opencourse/templates/courses/center_edit.html:7
+msgid "Center"
+msgstr "معهد"
+
+#: opencourse/courses/filters.py:28 opencourse/courses/forms.py:14
+#: opencourse/courses/forms.py:34
+#, fuzzy
+#| msgid "List of Students"
+msgid "Level of Study"
+msgstr "قائمة الطلاب"
+
+#: opencourse/courses/filters.py:29 opencourse/courses/forms.py:37
+#: opencourse/courses/models.py:54
+msgid "Level"
+msgstr "المستوى"
+
+#: opencourse/courses/filters.py:30 opencourse/courses/forms.py:41
+#: opencourse/courses/models.py:89
+#: opencourse/templates/components/course_body.html:43
+msgid "Age"
+msgstr "العمر"
+
+#: opencourse/courses/filters.py:31 opencourse/courses/forms.py:39
+#: opencourse/courses/models.py:113
+msgid "Language"
+msgstr "اللغة"
+
+#: opencourse/courses/filters.py:32 opencourse/courses/models.py:212
+msgid "Location"
+msgstr "المكان"
+
+#: opencourse/courses/formatChecker.py:34
+#: opencourse/profiles/formatChecker.py:34
+#, python-format
+msgid "Please keep filesize under %s. Current filesize %s"
+msgstr ""
+"Veuillez conserver la taille du fichier sous %s. Taille de fichier actuelle "
+"%s"
+
+#: opencourse/courses/formatChecker.py:36
+#: opencourse/profiles/formatChecker.py:36
+msgid "Filetype not supported."
+msgstr "نوع الملف غير مقبول."
+
+#: opencourse/courses/forms.py:33
+msgid "Title"
+msgstr "العنوان"
+
+#: opencourse/courses/forms.py:36 opencourse/courses/forms.py:118
+#: opencourse/courses/forms.py:143
+msgid "Description"
+msgstr "وصف وتفصيل"
+
+#: opencourse/courses/forms.py:38
+msgid "Extra information"
+msgstr "معلومات اضافية"
+
+#: opencourse/courses/forms.py:40 opencourse/courses/models.py:77
+#: opencourse/templates/components/course_body.html:57
+msgid "Duration"
+msgstr "مدة الحصة"
+
+#: opencourse/courses/forms.py:68
+msgid "Search an Area or a Course"
+msgstr "بحث عن درس أو مجال"
+
+#: opencourse/courses/forms.py:71
+msgid "Center name"
+msgstr "إسم المعهد"
+
+#: opencourse/courses/forms.py:77 opencourse/courses/models.py:190
+msgid "Currency"
+msgstr "العملة"
+
+#: opencourse/courses/forms.py:84
+msgid "Location type"
+msgstr "نوع المكان"
+
+#: opencourse/courses/forms.py:85
+msgid "Price"
+msgstr "السعر"
+
+#: opencourse/courses/forms.py:101
+msgid "accepted"
+msgstr "مقبول"
+
+#: opencourse/courses/forms.py:116 opencourse/courses/forms.py:142
+msgid "Name"
+msgstr "الإسم"
+
+#: opencourse/courses/forms.py:117
+msgid "Section"
+msgstr "مجموعة"
+
+#: opencourse/courses/forms.py:119
+msgid "Attachment"
+msgstr "المرفق"
+
+#: opencourse/courses/forms.py:120
+msgid "Link"
+msgstr "رابط يوتيوب"
+
+#: opencourse/courses/forms.py:144 opencourse/profiles/forms.py:102
+msgid "Picture"
+msgstr "صورة 1"
+
+#: opencourse/courses/forms.py:145 opencourse/profiles/forms.py:81
+msgid "Picture 2"
+msgstr "صورة 2"
+
+#: opencourse/courses/forms.py:146 opencourse/profiles/forms.py:82
+msgid "Picture 3"
+msgstr "صورة 3"
+
+#: opencourse/courses/forms.py:147
+msgid "Picture 4"
+msgstr "صورة 4"
+
+#: opencourse/courses/models.py:43
+#: opencourse/templates/courses/course_search.html:82
+msgid "Cities"
+msgstr "مدن"
+
+#: opencourse/courses/models.py:55
+msgid "Levels"
+msgstr "المستويات"
+
+#: opencourse/courses/models.py:66
+#, fuzzy
+#| msgid "Student level"
+msgid "StudiesLevel"
+msgstr "مستوى الطالب"
+
+#: opencourse/courses/models.py:67
+#, fuzzy
+#| msgid "Student level"
+msgid "StudiesLevels"
+msgstr "مستوى الطالب"
+
+#: opencourse/courses/models.py:78
+msgid "Durations"
+msgstr "المدة الزمنية"
+
+#: opencourse/courses/models.py:90
+msgid "Ages"
+msgstr "الأعمار"
+
+#: opencourse/courses/models.py:102
+msgid "Areas"
+msgstr "مجالات"
+
+#: opencourse/courses/models.py:114
+msgid "Languages"
+msgstr "اللغات"
+
+#: opencourse/courses/models.py:134
+#: opencourse/templates/courses/center_edit.html:63
+#: opencourse/templates/courses/center_search_results.html:67
+#: opencourse/templates/courses/centers_list.html:61
+#: opencourse/templates/courses/course_edit.html:63
+#: opencourse/templates/courses/course_list.html:65
+#: opencourse/templates/courses/course_students_list.html:88
+#: opencourse/templates/courses/enrollment_list.html:62
+#: opencourse/templates/courses/join_request_list.html:62
+#: opencourse/templates/profiles/student_detail.html:88
+msgid "Centers"
+msgstr "المعاهد"
+
+#: opencourse/courses/models.py:135
+msgid "Manage center"
+msgstr "إدارة معهد"
+
+#: opencourse/courses/models.py:165
+msgid "Course"
+msgstr "درس"
+
+#: opencourse/courses/models.py:167
+msgid "Manage course"
+msgstr "إدارة درس"
+
+#: opencourse/courses/models.py:177
+msgid "Location Type"
+msgstr "نوع المكان"
+
+#: opencourse/courses/models.py:178
+msgid "Location Types"
+msgstr "أنواع المكان"
+
+#: opencourse/courses/models.py:191
+msgid "Currencies"
+msgstr "العملات"
+
+#: opencourse/courses/models.py:213
+#: opencourse/templates/components/course_body.html:35
+#: opencourse/templates/courses/course_edit.html:116
+msgid "Locations"
+msgstr "أماكن"
+
+#: opencourse/courses/models.py:227 opencourse/courses/models.py:228
+msgid "Enrollment"
+msgstr "التسجيل"
+
+#: opencourse/courses/models.py:229
+msgid "Manage enrollment"
+msgstr "إدارة التسجيل"
+
+#: opencourse/courses/models.py:254 opencourse/courses/models.py:255
+#: opencourse/templates/courses/handout_edit.html:7
+msgid "Handout"
+msgstr "المستند"
+
+#: opencourse/courses/models.py:256
+msgid "Manage handout"
+msgstr "إدارة المستندات"
+
+#: opencourse/courses/models.py:270
+msgid "Join request"
+msgstr "طلب انضمام"
+
+#: opencourse/courses/models.py:271
+#: opencourse/templates/courses/join_request_list.html:6
+msgid "Join requests"
+msgstr "طلبات الانضمام"
+
+#: opencourse/courses/models.py:272
+msgid "Manage join request"
+msgstr "إدارة طلبات الانضمام"
+
+#: opencourse/profiles/apps.py:7
+msgid "Profiles"
+msgstr "لمحة مختصرة"
+
+#: opencourse/profiles/forms.py:17
+msgid "professor"
+msgstr "أستاذ"
+
+#: opencourse/profiles/forms.py:17
+msgid "student"
+msgstr "طالب"
+
+#: opencourse/profiles/forms.py:74 opencourse/profiles/forms.py:98
+#: opencourse/templates/courses/course_detail.html:36
+#: opencourse/templates/courses/course_students_list.html:63
+#: opencourse/templates/courses/professor_detail.html:33
+#: opencourse/templates/profiles/student_detail.html:63
+#: opencourse/templates/profiles/student_detail.html:166
+msgid "Telephone"
+msgstr "رقم الهاتف"
+
+#: opencourse/profiles/forms.py:75 opencourse/profiles/forms.py:99
+#: opencourse/templates/courses/course_detail.html:71
+#: opencourse/templates/courses/professor_detail.html:70
+msgid "Date of birth"
+msgstr "تاريخ الميلاد"
+
+#: opencourse/profiles/forms.py:77
+msgid "Biography"
+msgstr "سيرة شخصية"
+
+#: opencourse/profiles/forms.py:78 opencourse/profiles/forms.py:101
+msgid "Education level"
+msgstr "المستوى الدراسي"
+
+#: opencourse/profiles/forms.py:79
+msgid "Years of experience"
+msgstr "سنوات الخبرة"
+
+#: opencourse/profiles/forms.py:80
+msgid "Picture 1"
+msgstr "صورة 1"
+
+#: opencourse/profiles/forms.py:121
+msgid "Score"
+msgstr "نقطة"
+
+#: opencourse/profiles/forms.py:122
+msgid "Text"
+msgstr "نص"
+
+#: opencourse/profiles/models.py:31
+msgid "Access professor pages"
+msgstr "الوصول إلى صفحات الأستاذ"
+
+#: opencourse/profiles/models.py:32
+msgid "Access student pages"
+msgstr "الوصول إلى صفحات الطلاب"
+
+#: opencourse/profiles/models.py:38
+msgid "Profile picture"
+msgstr "الصوره"
+
+#: opencourse/profiles/models.py:39
+msgid "Profile picture1"
+msgstr "الصوره 1"
+
+#: opencourse/profiles/models.py:40
+msgid "Profile picture2"
+msgstr "الصوره 2"
+
+#: opencourse/profiles/models.py:41
+msgid "Email verified"
+msgstr "البريد مصدق"
+
+#: opencourse/profiles/models.py:64
+msgid "Student"
+msgstr "طالب"
+
+#: opencourse/profiles/models.py:65
+#: opencourse/templates/courses/course_search.html:108
+msgid "Students"
+msgstr "طلاب"
+
+#: opencourse/profiles/models.py:77
+#: opencourse/templates/courses/center_edit.html:53
+#: opencourse/templates/courses/center_search_results.html:57
+#: opencourse/templates/courses/centers_list.html:51
+#: opencourse/templates/courses/course_edit.html:53
+#: opencourse/templates/courses/course_list.html:55
+#: opencourse/templates/courses/course_students_list.html:78
+#: opencourse/templates/courses/enrollment_list.html:52
+#: opencourse/templates/courses/join_request_list.html:52
+#: opencourse/templates/profiles/student_detail.html:78
+msgid "Professor"
+msgstr "أستاذ"
+
+#: opencourse/profiles/models.py:78
+#: opencourse/templates/courses/course_search.html:95
+msgid "Professors"
+msgstr "أساتذة"
+
+#: opencourse/profiles/models.py:99
+#: opencourse/templates/courses/course_detail.html:208
+msgid "Review"
+msgstr "تقييم الأداء"
+
+#: opencourse/profiles/models.py:100
+#: opencourse/templates/courses/course_detail.html:199
+#: opencourse/templates/courses/professor_detail.html:218
+msgid "Reviews"
+msgstr "تقييمات الطلاب"
+
+#: opencourse/templates/403.html:5
+msgid "Forbidden"
+msgstr "ممنوع"
+
+#: opencourse/templates/403.html:12
+#, python-format
+msgid ""
+"You have no rights to access this page. <br>\n"
+"      You can <a href='%(search_url)s'>return</a> to the home page."
+msgstr ""
+"ليس لديك الحق في الوصول إلى هذه الصفحة. <br>\n"
+"      تستطيع <a href='%(search_url)s'>العودة</a> إلى الصفحة الرئيسية."
+
+#: opencourse/templates/account/email.html:6
+#: opencourse/templates/account/email.html:9
+msgid "E-mail Addresses"
+msgstr ""
+
+#: opencourse/templates/account/email.html:16
+msgid "The following e-mail addresses are associated with your account:"
+msgstr ""
+
+#: opencourse/templates/account/email.html:26
+msgid "Verified"
+msgstr "البريد مصدق"
+
+#: opencourse/templates/account/email.html:28
+msgid "Unverified"
+msgstr "البريد مصدق"
+
+#: opencourse/templates/account/email.html:30
+msgid "Primary"
+msgstr ""
+
+#: opencourse/templates/account/email.html:36
+msgid "Make Primary"
+msgstr ""
+
+#: opencourse/templates/account/email.html:37
+msgid "Re-send Verification"
+msgstr ""
+
+#: opencourse/templates/account/email.html:38
+msgid "Remove"
+msgstr ""
+
+#: opencourse/templates/account/email.html:45
+msgid "Warning:"
+msgstr ""
+
+#: opencourse/templates/account/email.html:45
+msgid ""
+"You currently do not have any e-mail address set up. You should really add "
+"an e-mail address so you can receive notifications, reset your password, etc."
+msgstr ""
+
+#: opencourse/templates/account/email.html:50
+msgid "Add E-mail Address"
+msgstr ""
+
+#: opencourse/templates/account/email.html:55
+msgid "Add E-mail"
+msgstr ""
+
+#: opencourse/templates/account/email.html:64
+msgid "Do you really want to remove the selected e-mail address?"
+msgstr ""
+
+#: opencourse/templates/account/email_confirm.html:6
+#: opencourse/templates/account/email_confirm.html:10
+msgid "Confirm E-mail Address"
+msgstr ""
+
+#: opencourse/templates/account/email_confirm.html:16
+#, python-format
+msgid ""
+"Please confirm that <a href=\"mailto:%(email)s\">%(email)s</a> is an e-mail "
+"address for user %(user_display)s."
+msgstr ""
+
+#: opencourse/templates/account/email_confirm.html:20
+#: opencourse/templates/confirm_delete.html:13
+msgid "Confirm"
+msgstr "تأكيد"
+
+#: opencourse/templates/account/email_confirm.html:27
+#, python-format
+msgid ""
+"This e-mail confirmation link expired or is invalid. Please <a href="
+"\"%(email_url)s\">issue a new e-mail confirmation request</a>."
+msgstr ""
+
+#: opencourse/templates/account/login.html:9
+#: opencourse/templates/account/login.html:45
+msgid "Sign In"
+msgstr "تسجيل الإشتراك"
+
+#: opencourse/templates/account/login.html:10
+#, python-format
+msgid ""
+"If you have not created an account yet, then please\n"
+"<a href=\"%(signup_url)s\">sign up</a> first."
+msgstr ""
+
+#: opencourse/templates/account/login.html:19
+#, python-format
+msgid ""
+"Please sign in with one\n"
+"of your existing third party accounts. Or, <a href=\"%(signup_url)s\">sign "
+"up</a>\n"
+"for a %(site_name)s account and sign in below:"
+msgstr ""
+
+#: opencourse/templates/account/login.html:29
+msgid "or"
+msgstr ""
+
+#: opencourse/templates/account/login.html:43
+msgid "Forgot Password?"
+msgstr ""
+
+#: opencourse/templates/account/logout.html:5
+#: opencourse/templates/account/logout.html:8
+#: opencourse/templates/account/logout.html:17
+msgid "Sign Out"
+msgstr "تسجيل الخروج"
+
+#: opencourse/templates/account/logout.html:10
+msgid "Are you sure you want to sign out?"
+msgstr "هل أنت متأكد أنك تريد الخروج"
+
+#: opencourse/templates/account/password_change.html:5
+#: opencourse/templates/account/password_change.html:8
+#: opencourse/templates/account/password_change.html:13
+msgid "Change Password"
+msgstr ""
+
+#: opencourse/templates/account/password_reset.html:6
+#: opencourse/templates/account/password_reset.html:10
+#: opencourse/templates/account/password_reset_done.html:6
+#: opencourse/templates/account/password_reset_done.html:9
+msgid "Password Reset"
+msgstr ""
+
+#: opencourse/templates/account/password_reset.html:15
+msgid ""
+"Forgotten your password? Enter your e-mail address below, and we'll send you "
+"an e-mail allowing you to reset it."
+msgstr ""
+
+#: opencourse/templates/account/password_reset.html:20
+msgid "Reset My Password"
+msgstr ""
+
+#: opencourse/templates/account/password_reset.html:23
+msgid "Please contact us if you have any trouble resetting your password."
+msgstr ""
+
+#: opencourse/templates/account/password_reset_done.html:15
+msgid ""
+"We have sent you an e-mail. Please contact us if you do not receive it "
+"within a few minutes."
+msgstr ""
+"لقد أرسلنا لك بريدًا إلكترونيًا. يرجى الاتصال بنا إذا لم تستلمها"
+"في غضون بضع دقائق."
+
+#: opencourse/templates/account/password_set.html:5
+#: opencourse/templates/account/password_set.html:8
+#: opencourse/templates/account/password_set.html:13
+msgid "Set Password"
+msgstr "ضبط كلمة السر"
+
+#: opencourse/templates/account/signup.html:8
+#: opencourse/templates/account/signup.html:22
+msgid "Sign Up"
+msgstr "تسجيل الإشتراك"
+
+#: opencourse/templates/account/signup.html:9
+#, python-format
+msgid ""
+"Already have an account? Then please <a href=\"%(login_url)s\">sign in</a>."
+msgstr ""
+
+#: opencourse/templates/account/signup.html:20
+#: opencourse/templates/base.html:213
+msgid "Site conditions"
+msgstr "شروط إستخدام الموقع"
+
+#: opencourse/templates/base.html:9
+msgid "SuperProf.ma"
+msgstr "SuperProf.ma"
+
+#: opencourse/templates/base.html:101
+msgid "Menu"
+msgstr "القائمة"
+
+#: opencourse/templates/base.html:106
+msgid "Home"
+msgstr "الصفحة الرئيسية"
+
+#: opencourse/templates/base.html:109
+#: opencourse/templates/courses/enrollment_list.html:91
+msgid "My Courses"
+msgstr "الدروس"
+
+#: opencourse/templates/base.html:112
+msgid "Dashboard"
+msgstr "لوحة القيادة"
+
+#: opencourse/templates/base.html:119
+#: opencourse/templates/courses/center_search_results.html:94
+msgid "Search results"
+msgstr "نتائج البحث"
+
+#: opencourse/templates/base.html:130
+#: opencourse/templates/profiles/profile.html:6
+msgid "Profile"
+msgstr "لمحة مختصرة"
+
+#: opencourse/templates/base.html:132
+msgid "Logout"
+msgstr "تسجيل الخروج"
+
+#: opencourse/templates/base.html:140
+msgid "Login"
+msgstr "تسجيل الدخول"
+
+#: opencourse/templates/base.html:143
+msgid "Signup"
+msgstr "تسجيل الإشتراك"
+
+#: opencourse/templates/base.html:209
+msgid "Copyright"
+msgstr "حقوق النشر"
+
+#: opencourse/templates/base.html:210
+msgid "All rights reserved"
+msgstr "كل الحقوق محفوظة"
+
+#: opencourse/templates/components/course_body.html:16
+msgid "Course City: "
+msgstr "المدينة:"
+
+#: opencourse/templates/components/course_body.html:27
+#, fuzzy
+#| msgid "Description"
+msgid "Course Description"
+msgstr "وصف وتفصيل"
+
+#: opencourse/templates/components/course_body.html:30
+#, fuzzy
+#| msgid "Extra information"
+msgid "Extra Information"
+msgstr "معلومات اضافية"
+
+#: opencourse/templates/components/course_body.html:51
+#, fuzzy
+#| msgid "Course"
+msgid "Course level"
+msgstr "درس"
+
+#: opencourse/templates/components/course_body.html:61
+msgid "The class is taught in"
+msgstr "لغة التدريس"
+
+#: opencourse/templates/components/course_body.html:77
+msgid "Your enrollment is under review."
+msgstr "تسجيلك قيد المراجعة"
+
+#: opencourse/templates/components/course_body.html:81
+msgid "Your enrollment was accepted."
+msgstr "تم قبول تسجيلك."
+
+#: opencourse/templates/components/course_body.html:85
+msgid "Your enrollment was rejected."
+msgstr "تم رفض تسجيلك."
+
+#: opencourse/templates/components/course_body.html:88
+msgid "Enroll"
+msgstr "إشترك"
+
+#: opencourse/templates/components/course_body.html:90
+msgid "Your enrollment request was sent."
+msgstr "تم إرسال طلب التسجيل الخاص بك."
+
+#: opencourse/templates/conditions.html:6
+msgid "Conditions"
+msgstr "تأكيد"
+
+#: opencourse/templates/confirm_delete.html:5
+msgid "Confirmation"
+msgstr "تأكيد"
+
+#: opencourse/templates/confirm_delete.html:12
+msgid "Are you sure you want to delete"
+msgstr "هل أنت متأكد أنك تريد حذف الدرس"
+
+#: opencourse/templates/courses/center_detail.html:45
+msgid "Training Center:"
+msgstr "مركز التدريس:"
+
+#: opencourse/templates/courses/center_detail.html:46
+msgid "Creation date"
+msgstr "تاريخ الإنشاء"
+
+#: opencourse/templates/courses/center_detail.html:48
+msgid "Created by"
+msgstr "انشأ من طرف"
+
+#: opencourse/templates/courses/center_detail.html:73
+msgid "Join"
+msgstr "أصبح عضوا"
+
+#: opencourse/templates/courses/center_detail.html:182
+#: opencourse/templates/courses/center_edit.html:60
+#: opencourse/templates/courses/center_search_results.html:64
+#: opencourse/templates/courses/centers_list.html:58
+#: opencourse/templates/courses/course_edit.html:60
+#: opencourse/templates/courses/course_list.html:62
+#: opencourse/templates/courses/course_list.html:91
+#: opencourse/templates/courses/course_students_list.html:85
+#: opencourse/templates/courses/enrollment_list.html:59
+#: opencourse/templates/courses/join_request_list.html:59
+#: opencourse/templates/profiles/student_detail.html:85
+msgid "List of Courses"
+msgstr "قائمة الدروس"
+
+#: opencourse/templates/courses/center_detail.html:193
+#: opencourse/templates/courses/course_list.html:140
+#: opencourse/templates/courses/course_search_results.html:212
+#: opencourse/templates/courses/professor_detail.html:191
+msgid "No courses yet."
+msgstr "لا توجد دروس حتى الآن"
+
+#: opencourse/templates/courses/center_detail.html:223
+msgid "List of Professors"
+msgstr "قائمة الأساتذة"
+
+#: opencourse/templates/courses/center_detail.html:228
+msgid "(Center Admin)"
+msgstr "(مسير المعهد)"
+
+#: opencourse/templates/courses/center_edit.html:66
+#: opencourse/templates/courses/center_search_results.html:70
+#: opencourse/templates/courses/centers_list.html:64
+#: opencourse/templates/courses/course_edit.html:66
+#: opencourse/templates/courses/course_list.html:68
+#: opencourse/templates/courses/course_students_list.html:91
+#: opencourse/templates/courses/enrollment_list.html:65
+#: opencourse/templates/courses/join_request_list.html:65
+#: opencourse/templates/profiles/student_detail.html:91
+msgid "Student Enroll Requests"
+msgstr "طلبات تسجيل الطلاب"
+
+#: opencourse/templates/courses/center_edit.html:69
+#: opencourse/templates/courses/center_search_results.html:73
+#: opencourse/templates/courses/centers_list.html:67
+#: opencourse/templates/courses/course_edit.html:69
+#: opencourse/templates/courses/course_list.html:71
+#: opencourse/templates/courses/course_students_list.html:94
+#: opencourse/templates/courses/enrollment_list.html:68
+#: opencourse/templates/courses/join_request_list.html:68
+#: opencourse/templates/courses/join_request_list.html:87
+#: opencourse/templates/profiles/student_detail.html:94
+msgid "Center Join Requests"
+msgstr "طلبات التسجيل في المعهد"
+
+#: opencourse/templates/courses/center_edit.html:89
+msgid "Create a New Center"
+msgstr "إنشاء معهد جديد"
+
+#: opencourse/templates/courses/center_edit.html:116
+msgid "Submit"
+msgstr "إرسال"
+
+#: opencourse/templates/courses/center_search_results.html:136
+msgid "No centers yet."
+msgstr "لم تنشئ أي معهد حتى الآن"
+
+#: opencourse/templates/courses/center_search_results.html:157
+#: opencourse/templates/courses/course_search_results.html:42
+msgid "Filters"
+msgstr "تعديلات إضافية"
+
+#: opencourse/templates/courses/center_search_results.html:161
+#: opencourse/templates/courses/course_search.html:43
+#: opencourse/templates/courses/course_search.html:60
+msgid "Search"
+msgstr "بحث"
+
+#: opencourse/templates/courses/centers_list.html:74
+msgid "Find a center"
+msgstr "ابحث عن معهد"
+
+#: opencourse/templates/courses/centers_list.html:91
+msgid "Centers Member of as a Professor"
+msgstr "المعاهد التي أنتمي إليها"
+
+#: opencourse/templates/courses/centers_list.html:100
+msgid "No participations in the centers yet."
+msgstr "لا توجد مشاركات في المعهد حتى الان."
+
+#: opencourse/templates/courses/centers_list.html:110
+msgid "Manage / create own Centers"
+msgstr "إدارة / إنشاء مراكز خاصة"
+
+#: opencourse/templates/courses/centers_list.html:114
+msgid "Create center"
+msgstr "إنشاء معهد"
+
+#: opencourse/templates/courses/centers_list.html:130
+msgid "No your centers yet."
+msgstr "لا توجد معاهد حتى الآن"
+
+#: opencourse/templates/courses/course_detail.html:27
+#: opencourse/templates/courses/course_detail.html:78
+#: opencourse/templates/courses/professor_detail.html:27
+#: opencourse/templates/courses/professor_detail.html:77
+msgid "Contact"
+msgstr "إتصل بالأستاذ"
+
+#: opencourse/templates/courses/course_detail.html:33
+#: opencourse/templates/courses/course_students_list.html:64
+#: opencourse/templates/profiles/student_detail.html:64
+#: opencourse/templates/profiles/student_detail.html:174
+msgid "Email"
+msgstr "البريد الإلكتروني"
+
+#: opencourse/templates/courses/course_detail.html:39
+#: opencourse/templates/courses/course_students_list.html:68
+#: opencourse/templates/courses/professor_detail.html:36
+#: opencourse/templates/profiles/student_detail.html:68
+msgid "Ok"
+msgstr "حسنا"
+
+#: opencourse/templates/courses/course_detail.html:72
+#: opencourse/templates/courses/professor_detail.html:71
+msgid "years of experience"
+msgstr "سنوات الخبرة"
+
+#: opencourse/templates/courses/course_detail.html:161
+#: opencourse/templates/courses/professor_detail.html:83
+msgid "About me"
+msgstr "نبذة عني"
+
+#: opencourse/templates/courses/course_detail.html:163
+#: opencourse/templates/courses/professor_detail.html:85
+msgid "Education"
+msgstr "المستوى العلمي"
+
+#: opencourse/templates/courses/course_detail.html:174
+#: opencourse/templates/courses/professor_detail.html:166
+msgid "No professor found."
+msgstr "لم يتم العثور على أي أستاذ"
+
+#: opencourse/templates/courses/course_detail.html:202
+msgid "Add review"
+msgstr "أضف تقييم"
+
+#: opencourse/templates/courses/course_detail.html:218
+#: opencourse/templates/courses/professor_detail.html:224
+msgid "Reviewed"
+msgstr "تم التقييم"
+
+#: opencourse/templates/courses/course_detail.html:224
+#: opencourse/templates/courses/professor_detail.html:229
+msgid "No reviews yet"
+msgstr "لا توجد تقييمات حتى الآن"
+
+#: opencourse/templates/courses/course_edit.html:7
+msgid "Сourse"
+msgstr "درس"
+
+#: opencourse/templates/courses/course_edit.html:88
+msgid "Create a New Course"
+msgstr "إنشاء درس"
+
+#: opencourse/templates/courses/course_edit.html:128
+msgid "Create"
+msgstr "إنشاء "
+
+#: opencourse/templates/courses/course_list.html:7
+msgid "Create course"
+msgstr "إنشاء درس"
+
+#: opencourse/templates/courses/course_list.html:93
+#: opencourse/templates/courses/howto.html:68
+#: opencourse/templates/courses/howto.html:134
+msgid "Create a Course"
+msgstr "إنشاء درس"
+
+#: opencourse/templates/courses/course_search.html:17
+msgid "What do you want to learn?"
+msgstr "أطلعنا عن ماذا تريد أن تتعلم"
+
+#: opencourse/templates/courses/course_search.html:24
+msgid "Find a Professor"
+msgstr "ابحث عن أستاذ"
+
+#: opencourse/templates/courses/course_search.html:26
+msgid "Find a Center"
+msgstr "ابحث عن معهد"
+
+#: opencourse/templates/courses/course_search.html:68
+msgid ""
+"From math tutoring to yoga, Superprof is the best and fastest way to find "
+"high-quality teachers."
+msgstr ""
+" هو أفضل وأسرع طريقة للعثور على أساتذة ذوي خبرة عالية SuperProf من دروس "
+"الرياضيات إلى دروس الموسيقى "
+
+#: opencourse/templates/courses/course_search.html:123
+#: opencourse/templates/courses/howto.html:51
+msgid "How to use this Website"
+msgstr "كيفية استخدام هذا الموقع"
+
+#: opencourse/templates/courses/course_search.html:124
+msgid ""
+"if you are a professor or a student there are plenty of videos to show you "
+"how to register in this website and how to use all the services offered"
+msgstr ""
+"إذا كنت أستاذًا أو طالبًا ، فهناك الكثير من مقاطع الفيديو "
+"لتوضيح كيفية التسجيل في هذا الموقع وكيفية استخدام جميع الخدمات المقدمة"
+
+#: opencourse/templates/courses/course_search_results.html:32
+msgid "Courses Search Results"
+msgstr "نتائج البحث"
+
+#: opencourse/templates/courses/course_search_results.html:52
+msgid "Filter"
+msgstr "تعديل"
+
+#: opencourse/templates/courses/course_search_results.html:181
+msgid "Details"
+msgstr "تفاصيل"
+
+#: opencourse/templates/courses/course_search_results.html:185
+msgid "Member since"
+msgstr "عضو منذ"
+
+#: opencourse/templates/courses/course_students_list.html:50
+#: opencourse/templates/profiles/student_detail.html:50
+msgid "Information"
+msgstr "معلومات"
+
+#: opencourse/templates/courses/course_students_list.html:65
+#: opencourse/templates/profiles/student_detail.html:65
+#: opencourse/templates/profiles/student_detail.html:158
+msgid "Education Level"
+msgstr "المستوى الدراسي"
+
+#: opencourse/templates/courses/course_students_list.html:114
+msgid "List of Students"
+msgstr "قائمة الطلاب"
+
+#: opencourse/templates/courses/course_students_list.html:116
+msgid "Change Student Enrollments"
+msgstr "إدارة التسجيل"
+
+#: opencourse/templates/courses/course_students_list.html:158
+msgid "No students yet."
+msgstr "لا يوجد طلاب حتى الان"
+
+#: opencourse/templates/courses/enrollment_list.html:6
+msgid "Enrollments"
+msgstr "التسجيلات"
+
+#: opencourse/templates/courses/enrollment_list.html:89
+msgid "Student Enrollments"
+msgstr "طلبات تسجيل الطلاب"
+
+#: opencourse/templates/courses/enrollment_list.html:130
+#: opencourse/templates/courses/join_request_list.html:121
+msgid "On"
+msgstr "On"
+
+#: opencourse/templates/courses/enrollment_list.html:131
+#: opencourse/templates/courses/join_request_list.html:122
+msgid "Off"
+msgstr "Off"
+
+#: opencourse/templates/courses/enrollment_list.html:146
+msgid "Delete"
+msgstr "حذف"
+
+#: opencourse/templates/courses/enrollment_list.html:151
+msgid "No enrollments yet."
+msgstr "لا توجد تسجيلات حتى الآن."
+
+#: opencourse/templates/courses/handout_edit.html:16
+msgid "Save"
+msgstr "تسجيل"
+
+#: opencourse/templates/courses/handout_list.html:7
+msgid "handouts"
+msgstr "مستندات"
+
+#: opencourse/templates/courses/handout_list.html:10
+msgid "Create handout"
+msgstr "إضافة مستند"
+
+#: opencourse/templates/courses/handout_list.html:47
+msgid "No handouts yet."
+msgstr "لا توجد مستندات حتى الآن"
+
+#: opencourse/templates/courses/howto.html:58
+#, fuzzy
+#| msgid "Education"
+msgid "Introduction"
+msgstr "المستوى العلمي"
+
+#: opencourse/templates/courses/howto.html:62
+#: opencourse/templates/courses/howto.html:82
+#, fuzzy
+#| msgid "Create handout"
+msgid "Create an Account"
+msgstr "إضافة مستند"
+
+#: opencourse/templates/courses/howto.html:65
+#: opencourse/templates/courses/howto.html:85
+msgid "Update your Profile"
+msgstr "تحديث ملفك الشخصي"
+
+#: opencourse/templates/courses/howto.html:71
+msgid "Add Handouts to a Course"
+msgstr "إضافة ملف أو وثيقة إلى درس"
+
+#: opencourse/templates/courses/howto.html:74
+#: opencourse/templates/courses/howto.html:148
+msgid "Create a Center"
+msgstr "إنشاء معهد جديد"
+
+#: opencourse/templates/courses/howto.html:77
+#: opencourse/templates/courses/howto.html:155
+msgid "Join a Center"
+msgstr "إلتحاق بمعهد"
+
+#: opencourse/templates/courses/howto.html:88
+msgid "Join a Course"
+msgstr "تسجيل في درس"
+
+#: opencourse/templates/courses/howto.html:111
+msgid "An Introduction on what to expect from this website"
+msgstr "مقدمة حول ما يمكن توقعه وفعله في هذا الموقع"
+
+#: opencourse/templates/courses/howto.html:120
+msgid "Create a Professor Account and Verify it"
+msgstr "إنشاء حساب أستاذ وتأكيده"
+
+#: opencourse/templates/courses/howto.html:127
+msgid "Update Professor's Profile to help Students"
+msgstr "تحديث ملف تعريف الأستاذ لمساعدة الطلاب"
+
+#: opencourse/templates/courses/howto.html:141
+msgid "Add handouts to a Course"
+msgstr "إضافة ملفات أو وثائق إلى الدروس"
+
+#: opencourse/templates/courses/howto.html:162
+msgid "Create a Student Account and Verify it"
+msgstr "إنشاء حساب طالب وتأكيده"
+
+#: opencourse/templates/courses/join_request_list.html:129
+msgid "No join requests yet."
+msgstr "لا توجد طلبات انضمام حتى الآن."
+
+#: opencourse/templates/courses/professor_detail.html:49
+msgid "Professor Information"
+msgstr "معلومات الأستاذ"
+
+#: opencourse/templates/courses/professor_detail.html:180
+msgid "List of Professor Courses"
+msgstr "قائمة دروس الأساتذة"
+
+#: opencourse/templates/privacy.html:6
+msgid "Privacy"
+msgstr "Privacy"
+
+#: opencourse/templates/profiles/profile.html:12
+msgid "Manage emails"
+msgstr "إدارة عناوين البريد الإلكتروني"
+
+#: opencourse/templates/profiles/profile.html:19
+msgid "Update"
+msgstr "تحديث"
+
+#: opencourse/templates/profiles/student_detail.html:114
+msgid "Student Information"
+msgstr "معلومات الطالب"
+
+#~ msgid "Student Requests"
+#~ msgstr "طلبات تسجيل الطلاب"
+
+#~ msgid "Registred Students"
+#~ msgstr "طلاب"
+
+#~ msgid "Registred Courses"
+#~ msgstr "إنشاء درس"
+
+#~ msgid "Participations"
+#~ msgstr "مشاركات"
+
+#~ msgid "No participants yet."
+#~ msgstr "لا يوجد مشاركين بعد."
+
+#~ msgid "Edit"
+#~ msgstr "تعديل"
+
+#~ msgid "Arab"
+#~ msgstr "العربية"
+
+#~ msgid "Professor courses"
+#~ msgstr "دروس الأستاذ"
